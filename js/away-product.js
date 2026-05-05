@@ -27,7 +27,7 @@ function addToCart() {
     size:     state.playerSize,
     price:    999,
     qty:      1,
-    image:    './images/jersey-front.png',
+    image:    './images/away-jersey-front.png',
   };
 
   // Save to custom local cart

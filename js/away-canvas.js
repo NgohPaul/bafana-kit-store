@@ -3,14 +3,14 @@ const GOLD_COLOR   = '#C8A84B';  // Gold print on green away jersey
 const NAME_FONT    = "'Barlow Condensed', 'Arial Narrow', sans-serif";
 const NUM_FONT     = "'Bebas Neue', 'Barlow Condensed', sans-serif";
 
-const IMG_FRONT = './images/jersey-front.png';
-const IMG_BACK  = './images/jersey-back.png';
-const IMG_SIDE  = './images/jersey-side.png';
+const IMG_FRONT  = './images/away-jersey-front.png';
+const IMG_BACK   = './images/away-jersey-back.png';
+const IMG_DETAIL = './images/away-jersey-detail.jpg';
 
 const views = [
-  { src: IMG_FRONT, label: 'Front View',             isBack: false },
-  { src: IMG_BACK,  label: 'Back View — Customized', isBack: true  },
-  { src: IMG_SIDE,  label: 'Side View',              isBack: false },
+  { src: IMG_FRONT,  label: 'Front View',             isBack: false },
+  { src: IMG_BACK,   label: 'Back View — Customized', isBack: true  },
+  { src: IMG_DETAIL, label: 'Detail Close-up',         isBack: false },
 ];
 
 // State
@@ -27,6 +27,7 @@ let mainImg, canvas, ctx, viewBadge, hintEl;
 // Preload back image for instant canvas draw
 const backImage = new Image();
 backImage.src = IMG_BACK;
+backImage.crossOrigin = 'anonymous';
 
 document.addEventListener('DOMContentLoaded', () => {
   mainImg   = document.getElementById('mainProductImg');
