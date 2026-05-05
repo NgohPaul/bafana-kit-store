@@ -344,8 +344,20 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=3"></script>
+  <!-- Hidden Shopify product context — gives addLine/buyNow the Shopify event context they need -->
+  <div aria-hidden="true" style="position:absolute;left:-9999px;height:0;overflow:hidden;">
+    <shopify-list-context type="product" query="products" first="6">
+      <template>
+        <div shopify-attr--data-handle="product.handle">
+          <button class="hidden-shopify-add" onclick="getElementById('shopify-cart').addLine(event).showModal()">add</button>
+          <button class="hidden-shopify-buy" onclick="document.querySelector('shopify-store').buyNow(event)">buy</button>
+        </div>
+      </template>
+    </shopify-list-context>
+  </div>
+
+  <script src="js/main.js?v=5"></script>
   <script src="js/away-canvas.js?v=4"></script>
-  <script src="js/away-product.js?v=3"></script>
+  <script src="js/away-product.js?v=5"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════
-   BAFANA KIT — PRODUCT PAGE INTERACTIONS
+   BAFANA KIT — HOME PRODUCT PAGE INTERACTIONS
    ═══════════════════════════════════════════════ */
 
 // ─── Tab Switching ───
@@ -14,73 +14,38 @@ function switchTab(btn, id) {
   document.getElementById('tab-' + id).classList.add('active');
 }
 
-// ─── Add to Cart (custom cart + Shopify cart) ───
-function addToCart() {
-  const nameInput = document.getElementById('nameInput');
-  const name = nameInput ? nameInput.value.trim().toUpperCase() : 'No name';
-
-  const item = {
-    id:       Date.now(),
-    product:  'Bafana Bafana Home Jersey 2026',
-    name:     name || 'No name',
-    number:   state.playerNumber,
-    size:     state.playerSize,
-    price:    999,
-    qty:      1,
-    image:    './images/home-jersey-front.png',
-  };
-
-  // Save to custom local cart
-  const cart = getCart();
-  cart.push(item);
-  saveCart(cart);
-
-  // Also add to Shopify cart if available
-  const shopifyCart = document.getElementById('shopify-cart');
-  if (shopifyCart) {
-    // Find the add-to-cart button inside the Shopify context and trigger it
-    const shopifyAddBtn = document.getElementById('shopifyAddBtn');
-    if (shopifyAddBtn) {
-      shopifyAddBtn.click();
-      return; // Shopify cart modal will open
+// ─── Find the hidden Shopify button for the home (non-away) product ───
+function getHiddenShopifyBtn(selector) {
+  const items = document.querySelectorAll('[data-handle]');
+  for (const item of items) {
+    const handle = (item.dataset.handle || '').toLowerCase();
+    if (handle && !handle.includes('away')) {
+      const btn = item.querySelector(selector);
+      if (btn) return btn;
     }
   }
-
-  // Show custom modal
-  showModal('Added to Cart!', item);
+  return null;
 }
 
-function buyNow() {
-  const nameInput = document.getElementById('nameInput');
-  const name = nameInput ? nameInput.value.trim().toUpperCase() : 'No name';
-
-  const item = {
-    id:      Date.now(),
-    product: 'Bafana Bafana Home Jersey 2026',
-    name,
-    number:  state.playerNumber,
-    size:    state.playerSize,
-    price:   999,
-    qty:     1,
-    image:   './images/home-jersey-front.png',
-  };
-
-  const cart = getCart();
-  cart.push(item);
-  saveCart(cart);
-
-  // Try Shopify buyNow
-  const shopifyStore = document.querySelector('shopify-store');
-  const shopifyAddBtn = document.getElementById('shopifyAddBtn');
-  if (shopifyStore && shopifyAddBtn) {
-    // Use Shopify's native buyNow
-    try {
-      shopifyStore.buyNow(new Event('click'));
-    } catch(e) {
-      window.location.href = 'checkout.html';
-    }
+// ─── Add to Cart ───
+function addToCart() {
+  const btn = getHiddenShopifyBtn('.hidden-shopify-add');
+  if (btn) {
+    btn.click();
     return;
   }
+  // Fallback: open cart anyway
+  const cart = document.getElementById('shopify-cart');
+  if (cart) cart.showModal();
+}
 
-  window.location.href = 'checkout.html';
+// ─── Buy Now ───
+function buyNow() {
+  const btn = getHiddenShopifyBtn('.hidden-shopify-buy');
+  if (btn) {
+    btn.click();
+    return;
+  }
+  // Fallback: go to Shopify store
+  window.location.href = 'https://bafana-bafana-5.myshopify.com';
 }

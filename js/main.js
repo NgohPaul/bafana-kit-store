@@ -44,10 +44,10 @@ function saveCart(cart) {
 // ─── Navigate to cart ───
 function goToCart() {
   const shopifyCart = document.getElementById('shopify-cart');
-  if (shopifyCart) {
+  if (shopifyCart && typeof shopifyCart.showModal === 'function') {
     shopifyCart.showModal();
-  } else {
-    window.location.href = '/cart.html';
+  } else if (shopifyCart) {
+    shopifyCart.setAttribute('open', '');
   }
 }
 
