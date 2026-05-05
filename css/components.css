@@ -295,9 +295,43 @@
   border-radius: 4px;
   z-index: 2;
 }
+.product-card__discount-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #e11d48;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 6px;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(225,29,72,0.35);
+  animation: pulse-badge 2s ease-in-out infinite;
+}
+@keyframes pulse-badge {
+  0%, 100% { transform: scale(1); box-shadow: 0 2px 8px rgba(225,29,72,0.35); }
+  50%       { transform: scale(1.07); box-shadow: 0 4px 14px rgba(225,29,72,0.55); }
+}
+.product-card__price-original {
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+  margin-right: 6px;
+  opacity: 0.75;
+}
+.product-card__price-sale {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--color-green-primary);
+  font-weight: 800;
+}
 .product-card__wishlist {
   position: absolute;
-  top: 10px;
+  top: 50px;
   right: 12px;
   background: var(--color-white);
   border: 1px solid var(--color-gray-border);

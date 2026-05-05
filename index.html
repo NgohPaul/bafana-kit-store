@@ -97,7 +97,6 @@
   <!-- Featured Products from Shopify -->
   <section class="featured-section">
     <h2 class="featured-section__title">Shop the Collection</h2>
-    <p class="featured-section__subtitle">Official 2025 Bafana Bafana kits and accessories from your Shopify store</p>
 
     <div class="featured-grid">
       <!-- Shopify Products List -->
@@ -106,7 +105,8 @@
           <article class="product-card" onclick="getElementById('product-detail-modal').showModal(); getElementById('product-detail-context').update(event);">
             <div class="product-card__image-wrap">
               <shopify-media width="300" height="300" query="product.selectedOrFirstAvailableVariant.image"></shopify-media>
-              <div class="product-card__badge">Official 2025</div>
+              <div class="product-card__badge">Official 2026</div>
+              <div class="product-card__discount-badge">40% OFF</div>
               <button class="product-card__wishlist" aria-label="Add to wishlist" onclick="event.stopPropagation();">♡</button>
             </div>
             <div class="product-card__body">
@@ -122,7 +122,8 @@
               </div>
               <div class="product-card__footer">
                 <span class="product-card__price">
-                  <shopify-money query="product.selectedOrFirstAvailableVariant.price"></shopify-money>
+                  <span class="product-card__price-original">R1,499</span>
+                  <span class="product-card__price-sale">R999</span>
                 </span>
                 <button class="product-card__cta" onclick="event.stopPropagation(); getElementById('product-detail-modal').showModal(); getElementById('product-detail-context').update(event);">
                   View
