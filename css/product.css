@@ -256,7 +256,7 @@
 }
 
 /* ─── GALLERY ─── */
-.gallery { padding-right: 48px; }
+.gallery { padding-right: 48px; position: relative; }
 .gallery__stage {
   position: relative;
   background: var(--color-image-bg);
@@ -299,7 +299,7 @@
 .gallery__discount-badge {
   position: absolute;
   top: 14px;
-  right: 14px;
+  right: 62px;
   background: #e11d48;
   color: #fff;
   font-size: 13px;
@@ -308,6 +308,7 @@
   text-transform: uppercase;
   padding: 5px 12px;
   border-radius: 6px;
+  z-index: 10;
   animation: pulse-badge 2s ease-in-out infinite;
 }
 .gallery__zoom-hint {
