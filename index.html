@@ -102,7 +102,7 @@
       <!-- Shopify Products List -->
       <shopify-list-context type="product" query="products" first="6">
         <template>
-          <article class="product-card" shopify-attr--data-handle="product.handle" onclick="navigateToProduct(this)">
+          <article class="product-card" shopify-attr--data-handle="product.handle">
             <div class="product-card__image-wrap">
               <shopify-media width="300" height="300" query="product.selectedOrFirstAvailableVariant.image"></shopify-media>
               <div class="product-card__badge">Official 2026</div>
@@ -125,9 +125,7 @@
                   <span class="product-card__price-original">R1,499</span>
                   <span class="product-card__price-sale">R999</span>
                 </span>
-                <button class="product-card__cta" onclick="event.stopPropagation(); navigateToProduct(this.closest('.product-card'))">
-                  Buy
-                </button>
+                <button class="product-card__cta">Buy</button>
               </div>
             </div>
           </article>
@@ -180,6 +178,22 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=3"></script>
+  <script>
+    function attachHomeCardRouting() {
+      document.querySelectorAll('.featured-grid .product-card').forEach(card => {
+        if (card.dataset.routed) return;
+        card.dataset.routed = '1';
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', e => {
+          if (e.target.closest('.product-card__wishlist')) return;
+          navigateToProduct(card);
+        });
+      });
+    }
+    const _homeRouteObserver = new MutationObserver(attachHomeCardRouting);
+    _homeRouteObserver.observe(document.body, { childList: true, subtree: true });
+    document.addEventListener('DOMContentLoaded', attachHomeCardRouting);
+  </script>
 </body>
 </html>

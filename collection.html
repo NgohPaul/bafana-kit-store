@@ -78,7 +78,7 @@
   <div class="collection-grid">
     <shopify-list-context type="product" query="products" first="12">
       <template>
-        <article class="product-card" shopify-attr--data-handle="product.handle" onclick="window.location.href='product.html'">
+        <article class="product-card" shopify-attr--data-handle="product.handle">
           <div class="product-card__image-wrap">
             <shopify-media width="300" height="300" query="product.selectedOrFirstAvailableVariant.image"></shopify-media>
             <div class="product-card__badge">Official 2026</div>
@@ -101,9 +101,7 @@
                 <span class="product-card__price-original">R1,499</span>
                 <span class="product-card__price-sale">R999</span>
               </span>
-              <button class="product-card__cta" onclick="event.stopPropagation(); window.location.href='product.html'">
-                Buy
-              </button>
+              <button class="product-card__cta">Buy</button>
             </div>
           </div>
         </article>
@@ -133,19 +131,28 @@
 
   <script src="js/main.js?v=3"></script>
   <script>
-    // Hide away jersey cards — this page is home kits only
-    function filterHomeKits() {
-      document.querySelectorAll('.product-card').forEach(card => {
+    function setupHomeKitCards() {
+      document.querySelectorAll('.collection-grid .product-card').forEach(card => {
         const handle = (card.dataset.handle || '').toLowerCase();
         const title = (card.querySelector('.product-card__name')?.textContent || '').toLowerCase();
+        // Hide away jerseys
         if (handle.includes('away') || title.includes('away')) {
-          card.closest('li, article') && (card.style.display = 'none') || (card.style.display = 'none');
+          card.style.display = 'none';
+          return;
         }
+        // Attach click routing (once)
+        if (card.dataset.routed) return;
+        card.dataset.routed = '1';
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', e => {
+          if (e.target.closest('.product-card__wishlist')) return;
+          window.location.href = 'product.html';
+        });
       });
     }
-    const _homeObserver = new MutationObserver(filterHomeKits);
-    _homeObserver.observe(document.body, { childList: true, subtree: true });
-    document.addEventListener('DOMContentLoaded', filterHomeKits);
+    const _collectionObserver = new MutationObserver(setupHomeKitCards);
+    _collectionObserver.observe(document.body, { childList: true, subtree: true });
+    document.addEventListener('DOMContentLoaded', setupHomeKitCards);
   </script>
 </body>
 </html>
