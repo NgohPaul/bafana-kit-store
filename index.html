@@ -199,7 +199,7 @@
   <style>
     /* ── Testimonials Section ── */
     .testimonials-section {
-      background: #0a1628;
+      background: #071a0e;
       padding: 80px 24px 90px;
       overflow: hidden;
     }
@@ -212,7 +212,7 @@
       font-weight: 700;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: #C8A84B;
+      color: #b8943c;
       margin-bottom: 12px;
     }
     .testimonials-section__title {
@@ -235,8 +235,8 @@
 
     /* Individual card */
     .testim-card {
-      background: #111e35;
-      border: 1px solid rgba(200,168,75,0.18);
+      background: #0d3a1a;
+      border: 1px solid rgba(184,148,60,0.22);
       border-radius: 20px;
       padding: 32px 28px;
       width: 320px;
@@ -249,17 +249,17 @@
     .testim-card--active {
       transform: scale(1) rotateY(0deg);
       opacity: 1;
-      box-shadow: 0 20px 60px rgba(200,168,75,0.18), 0 0 0 2px rgba(200,168,75,0.35);
+      box-shadow: 0 20px 60px rgba(26,107,58,0.35), 0 0 0 2px rgba(184,148,60,0.45);
       z-index: 2;
     }
     .testim-card--left {
       transform: scale(0.88) rotateY(12deg) translateX(-20px);
-      opacity: 0.5;
+      opacity: 0.45;
       z-index: 1;
     }
     .testim-card--right {
       transform: scale(0.88) rotateY(-12deg) translateX(20px);
-      opacity: 0.5;
+      opacity: 0.45;
       z-index: 1;
     }
     .testim-card--hidden {
@@ -270,8 +270,8 @@
     .testim-card__quote-icon {
       font-size: 48px;
       line-height: 1;
-      color: #C8A84B;
-      opacity: 0.5;
+      color: #b8943c;
+      opacity: 0.55;
       margin-bottom: 8px;
       font-family: Georgia, serif;
     }
@@ -280,7 +280,7 @@
     .testim-card__text {
       font-size: 15px;
       line-height: 1.7;
-      color: #c8d6f0;
+      color: #d4e8d8;
       margin-bottom: 28px;
       min-height: 90px;
     }
@@ -305,7 +305,7 @@
       height: 52px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid #C8A84B;
+      border: 2px solid #b8943c;
       flex-shrink: 0;
     }
     .testim-card__name {
@@ -316,10 +316,10 @@
     }
     .testim-card__meta {
       font-size: 12px;
-      color: #7a90b8;
+      color: #7ab88a;
     }
     .testim-card__stars {
-      color: #C8A84B;
+      color: #b8943c;
       font-size: 13px;
       margin-bottom: 4px;
       letter-spacing: 1px;
@@ -334,9 +334,9 @@
       margin-top: 36px;
     }
     .testimonials-nav__btn {
-      background: rgba(200,168,75,0.12);
-      border: 1px solid rgba(200,168,75,0.3);
-      color: #C8A84B;
+      background: rgba(184,148,60,0.12);
+      border: 1px solid rgba(184,148,60,0.35);
+      color: #b8943c;
       border-radius: 50%;
       width: 44px;
       height: 44px;
@@ -348,7 +348,7 @@
       justify-content: center;
     }
     .testimonials-nav__btn:hover {
-      background: rgba(200,168,75,0.25);
+      background: rgba(184,148,60,0.25);
       transform: scale(1.08);
     }
     .testimonials-dots {
@@ -359,14 +359,14 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: rgba(200,168,75,0.3);
+      background: rgba(184,148,60,0.3);
       border: none;
       cursor: pointer;
       transition: background 0.25s, transform 0.25s;
       padding: 0;
     }
     .testimonials-dot--active {
-      background: #C8A84B;
+      background: #b8943c;
       transform: scale(1.35);
     }
 
@@ -403,6 +403,76 @@
   <script>
     (function () {
       const TESTIMONIALS = [
+        {
+          text: "Absolutely love my Bafana Bafana jersey! The quality is top-tier and the custom name looks clean and professional. Definitely ordering again.",
+          name: "Zanele P.",
+          meta: "Soweto, Gauteng",
+          stars: 5,
+          img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=120&h=120&fit=crop&crop=face&auto=format"
+        },
+        {
+          text: "Fast delivery and perfect fit. The material feels premium and breathable. Proud to wear this on match days 🇿🇦",
+          name: "Thabo R.",
+          meta: "Port Elizabeth, Eastern Cape",
+          stars: 5,
+          img: "https://images.unsplash.com/photo-1520341280432-4749d4d7bcf9?w=120&h=120&fit=crop&crop=face&auto=format"
+        },
+        {
+          text: "The customization is what sold me. My name and number came out exactly how I wanted. Looks like an official kit!",
+          name: "Kagiso M.",
+          meta: "Bloemfontein, Free State",
+          stars: 5,
+          img: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?w=120&h=120&fit=crop&crop=face&auto=format"
+        },
+        {
+          text: "Great service and communication. The jersey arrived quicker than expected and looks even better in person.",
+          name: "Nomsa V.",
+          meta: "Polokwane, Limpopo",
+          stars: 5,
+          img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=120&h=120&fit=crop&crop=face&auto=format"
+        },
+        {
+          text: "Super happy with my purchase. The colors are vibrant and haven't faded after washing. Worth every rand.",
+          name: "Bongani S.",
+          meta: "Kimberley, Northern Cape",
+          stars: 5,
+          img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&h=120&fit=crop&crop=face&auto=format"
+        },
+        {
+          text: "Ordered for a friend and he loved it! The print quality is sharp and doesn't peel. Highly recommend.",
+          name: "Mpho L.",
+          meta: "Nelspruit, Mpumalanga",
+          stars: 5,
+          img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=120&h=120&fit=crop&crop=face&auto=format"
+        },
+        {
+          text: "Clean design, perfect sizing, and comfortable to wear. Easily one of my favorite football shirts.",
+          name: "Siya T.",
+          meta: "George, Western Cape",
+          stars: 5,
+          img: "https://images.unsplash.com/photo-1520341280432-4749d4d7bcf9?w=120&h=120&fit=crop&crop=face&auto=format"
+        },
+        {
+          text: "Customer support was helpful and the ordering process was smooth. Jersey fits perfectly and feels durable.",
+          name: "Lindiwe G.",
+          meta: "Pietermaritzburg, KwaZulu-Natal",
+          stars: 5,
+          img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=120&h=120&fit=crop&crop=face&auto=format"
+        },
+        {
+          text: "Feels like an official Bafana kit. The stitching and fabric quality are impressive for the price.",
+          name: "Tshepo A.",
+          meta: "Rustenburg, North West",
+          stars: 5,
+          img: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?w=120&h=120&fit=crop&crop=face&auto=format"
+        },
+        {
+          text: "I've bought jerseys before but this one stands out. Custom name looks amazing and delivery was on time. Will be back for more!",
+          name: "Refiloe N.",
+          meta: "East London, Eastern Cape",
+          stars: 5,
+          img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&h=120&fit=crop&crop=face&auto=format"
+        },
         {
           text: "Ordered the home jersey and it arrived in two days. The quality is unreal — feels exactly like what the boys wear on the pitch. Got my name and number printed on the back and I haven't taken it off since.",
           name: "Sipho M.",
