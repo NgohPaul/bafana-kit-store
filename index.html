@@ -541,9 +541,10 @@
         text.split(' ').forEach((word, i) => {
           const span = document.createElement('span');
           span.className = 'word';
-          span.textContent = word + ' ';
+          span.textContent = word;
           span.style.animationDelay = (i * 0.045) + 's';
           el.appendChild(span);
+          el.appendChild(document.createTextNode(' '));
         });
       }
 
