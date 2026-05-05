@@ -1,3 +1,6 @@
+const SHOPIFY_API = 'https://bafana-bafana-5.myshopify.com/api/2024-01/graphql.json';
+const SHOPIFY_TOKEN = 'cdb151548aff66750a9460fdbe70d766';
+
 // ─── Product Routing ───
 function navigateToProduct(card) {
   const handle = (card.dataset.handle || '').toLowerCase();
@@ -12,33 +15,59 @@ function navigateToProduct(card) {
 
 // ─── Cart Badge ───
 function updateCartBadge(count) {
-  document.querySelectorAll('#cartCount').forEach(el => el.textContent = count ?? '0');
+  const n = parseInt(count, 10) || 0;
+  document.querySelectorAll('#cartCount').forEach(el => el.textContent = n);
 }
 
-function syncCartBadge() {
-  // Try Shopify cart web component first
-  const shopifyCart = document.getElementById('shopify-cart');
-  if (shopifyCart && typeof shopifyCart.getLines === 'function') {
-    try {
-      const lines = shopifyCart.getLines() || [];
-      const count = lines.reduce((sum, l) => sum + (l.quantity || 1), 0);
-      updateCartBadge(count);
-      return;
-    } catch(e) { /* fall through to localStorage */ }
+// Read count from a Shopify cart event detail object
+function countFromDetail(detail) {
+  if (!detail) return null;
+  if (typeof detail.totalQuantity === 'number') return detail.totalQuantity;
+  if (detail.cart && typeof detail.cart.totalQuantity === 'number') return detail.cart.totalQuantity;
+  if (Array.isArray(detail.lines)) return detail.lines.reduce((s, l) => s + (l.quantity || 1), 0);
+  if (detail.cart && Array.isArray(detail.cart.lines?.edges))
+    return detail.cart.lines.edges.reduce((s, e) => s + (e.node?.quantity || 1), 0);
+  return null;
+}
+
+// Fetch cart count from Shopify Storefront API using stored cart ID
+async function fetchShopifyCartCount() {
+  const cartId = localStorage.getItem('shopify_cart_id')
+    || localStorage.getItem('shopify-cart-id')
+    || document.getElementById('shopify-cart')?.getAttribute('cart-id');
+  if (!cartId) return 0;
+  try {
+    const res = await fetch(SHOPIFY_API, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': SHOPIFY_TOKEN,
+      },
+      body: JSON.stringify({ query: `{ cart(id: ${JSON.stringify(cartId)}) { totalQuantity } }` }),
+    });
+    const data = await res.json();
+    return data?.data?.cart?.totalQuantity ?? 0;
+  } catch (e) {
+    return 0;
   }
-  // Fallback: localStorage
-  const cart = JSON.parse(localStorage.getItem('bafanaCart') || '[]');
-  const count = cart.reduce((sum, i) => sum + (i.qty || 1), 0);
-  updateCartBadge(count);
 }
 
-// ─── Cart Persistence ───
-function getCart() {
-  return JSON.parse(localStorage.getItem('bafanaCart') || '[]');
-}
-function saveCart(cart) {
-  localStorage.setItem('bafanaCart', JSON.stringify(cart));
-  syncCartBadge();
+function syncCartBadge(evt) {
+  // 1. Try event detail (fired by Shopify web components)
+  if (evt?.detail) {
+    const n = countFromDetail(evt.detail);
+    if (n !== null) { updateCartBadge(n); return; }
+  }
+
+  // 2. Try shopify-cart element properties
+  const shopifyCart = document.getElementById('shopify-cart');
+  if (shopifyCart) {
+    const n = shopifyCart.totalQuantity ?? shopifyCart.itemCount ?? shopifyCart.count;
+    if (typeof n === 'number') { updateCartBadge(n); return; }
+  }
+
+  // 3. Async fallback: Shopify Storefront API
+  fetchShopifyCartCount().then(updateCartBadge);
 }
 
 // ─── Navigate to cart ───
@@ -53,9 +82,11 @@ function goToCart() {
 
 // ─── Hamburger Toggle ───
 document.addEventListener('DOMContentLoaded', () => {
+  // Clear stale custom cart data so it never poisons the badge
+  localStorage.removeItem('bafanaCart');
+
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const mobileDrawer = document.getElementById('mobileDrawer');
-
   if (hamburgerBtn && mobileDrawer) {
     hamburgerBtn.addEventListener('click', () => {
       const isOpen = mobileDrawer.classList.toggle('open');
@@ -65,28 +96,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Highlight active nav link
   document.querySelectorAll('.navbar__link').forEach(link => {
-    if (link.href === window.location.href) {
-      link.classList.add('active');
-    }
+    if (link.href === window.location.href) link.classList.add('active');
   });
 
-  syncCartBadge();
-
-  // Listen for Shopify cart web component events
-  const events = [
+  // Listen for Shopify cart events and pass the event so we can read detail
+  const cartEvents = [
     'shopify-cart-updated',
     'shopify-line-added',
     'shopify-line-removed',
     'shopify-line-updated',
     'cart-updated',
   ];
-  events.forEach(evtName => {
-    document.addEventListener(evtName, syncCartBadge);
-    window.addEventListener(evtName, syncCartBadge);
+  cartEvents.forEach(name => {
+    document.addEventListener(name, syncCartBadge);
+    window.addEventListener(name, syncCartBadge);
   });
 
-  // Also poll the Shopify cart every 2 seconds as a safety net
-  setInterval(syncCartBadge, 2000);
+  // Initial sync + poll every 3 seconds as safety net
+  syncCartBadge();
+  setInterval(syncCartBadge, 3000);
 });
 
 // ─── Modal Controls ───
@@ -114,14 +142,11 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
-// Close on backdrop click
-document.addEventListener('click', (e) => {
+document.addEventListener('click', e => {
   const modal = document.getElementById('cartModal');
   if (modal && e.target === modal) closeModal();
 });
-
-// Close on Escape key
-document.addEventListener('keydown', (e) => {
+document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeModal();
 });
 
