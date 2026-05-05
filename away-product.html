@@ -100,6 +100,7 @@
         />
         <canvas id="customCanvas" class="gallery__canvas" aria-label="Customised jersey back view"></canvas>
         <div class="gallery__badge" id="viewBadge">Front View</div>
+        <div class="gallery__discount-badge">40% OFF</div>
         <div class="gallery__zoom-hint">Click to zoom</div>
       </div>
 
@@ -149,14 +150,14 @@
         </div>
 
         <div class="customiser__field">
-          <label class="customiser__label" for="nameInput">Player Name</label>
+          <label class="customiser__label" for="nameInput">Your Name</label>
           <input
             class="customiser__input"
             type="text"
             id="nameInput"
             name="playerName"
             maxlength="14"
-            placeholder="Enter player name"
+            placeholder="Enter your name"
             autocomplete="off"
             spellcheck="false"
             oninput="onNameInput(this.value)"
@@ -181,7 +182,7 @@
               min="1" max="99"
               placeholder="##"
               aria-label="Custom squad number"
-              oninput="onNumberChange(this.value, null, true)"
+              oninput="this.value = Math.min(99, Math.max(1, parseInt(this.value) || 1)); onNumberChange(this.value, null, true)"
             >
             <span class="customiser__num-label">custom number</span>
           </div>

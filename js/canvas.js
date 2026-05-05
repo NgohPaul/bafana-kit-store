@@ -111,7 +111,7 @@ function drawBack() {
     ctx.drawImage(img, dx, dy, dw, dh);
 
     // ── TEXT OVERLAY ──
-    const nameDisplay = (state.playerName.trim().toUpperCase()) || 'PLAYER NAME';
+    const nameDisplay = (state.playerName.trim().toUpperCase()) || 'YOUR NAME';
     const numDisplay  = String(state.playerNumber || '10');
     const cx          = dx + dw * 0.5;
 
