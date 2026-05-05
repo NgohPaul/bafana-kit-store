@@ -50,7 +50,7 @@
   <div class="collection-grid">
     <shopify-list-context type="product" query="products" first="12">
       <template>
-        <article class="product-card" onclick="window.location.href='away-product.html'">
+        <article class="product-card" shopify-attr--data-handle="product.handle" onclick="window.location.href='away-product.html'">
           <div class="product-card__image-wrap">
             <shopify-media width="300" height="300" query="product.selectedOrFirstAvailableVariant.image"></shopify-media>
             <div class="product-card__badge">Official 2026</div>
@@ -89,5 +89,20 @@
   </footer>
 
   <script src="js/main.js?v=3"></script>
+  <script>
+    // Hide home jersey cards — this page is away kits only
+    function filterAwayKits() {
+      document.querySelectorAll('.product-card').forEach(card => {
+        const handle = (card.dataset.handle || '').toLowerCase();
+        const title = (card.querySelector('.product-card__name')?.textContent || '').toLowerCase();
+        if (!handle.includes('away') && handle !== '' && !title.includes('away') && title !== '') {
+          card.style.display = 'none';
+        }
+      });
+    }
+    const _awayObserver = new MutationObserver(filterAwayKits);
+    _awayObserver.observe(document.body, { childList: true, subtree: true });
+    document.addEventListener('DOMContentLoaded', filterAwayKits);
+  </script>
 </body>
 </html>

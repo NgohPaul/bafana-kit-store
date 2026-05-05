@@ -1,8 +1,9 @@
 // ─── Product Routing ───
 function navigateToProduct(card) {
+  const handle = (card.dataset.handle || '').toLowerCase();
   const titleEl = card.querySelector('.product-card__name');
   const title = (titleEl ? titleEl.textContent : '').trim().toLowerCase();
-  if (title.includes('away')) {
+  if (handle.includes('away') || title.includes('away')) {
     window.location.href = 'away-product.html';
   } else {
     window.location.href = 'product.html';

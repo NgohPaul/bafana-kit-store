@@ -102,7 +102,7 @@
       <!-- Shopify Products List -->
       <shopify-list-context type="product" query="products" first="6">
         <template>
-          <article class="product-card" onclick="navigateToProduct(this)">
+          <article class="product-card" shopify-attr--data-handle="product.handle" onclick="navigateToProduct(this)">
             <div class="product-card__image-wrap">
               <shopify-media width="300" height="300" query="product.selectedOrFirstAvailableVariant.image"></shopify-media>
               <div class="product-card__badge">Official 2026</div>
