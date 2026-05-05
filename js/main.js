@@ -1,16 +1,23 @@
-/* ═══════════════════════════════════════════════
-   BAFANA KIT — MAIN JS (Global Cart, Navbar, Utils)
-   ═══════════════════════════════════════════════ */
+// ─── Cart Badge ───
+function updateCartBadge(count) {
+  document.querySelectorAll('#cartCount').forEach(el => el.textContent = count ?? '0');
+}
 
-// ─── Shopify Config ───
-const SHOPIFY_DOMAIN = 'bafana-bafana-5.myshopify.com';
-const SHOPIFY_TOKEN  = 'cdb151548aff66750a9460fdbe70d766';
-
-// ─── Cart Badge (for custom cart counter) ───
-function updateCartBadge() {
+function syncCartBadge() {
+  // Try Shopify cart web component first
+  const shopifyCart = document.getElementById('shopify-cart');
+  if (shopifyCart && typeof shopifyCart.getLines === 'function') {
+    try {
+      const lines = shopifyCart.getLines() || [];
+      const count = lines.reduce((sum, l) => sum + (l.quantity || 1), 0);
+      updateCartBadge(count);
+      return;
+    } catch(e) { /* fall through to localStorage */ }
+  }
+  // Fallback: localStorage
   const cart = JSON.parse(localStorage.getItem('bafanaCart') || '[]');
   const count = cart.reduce((sum, i) => sum + (i.qty || 1), 0);
-  document.querySelectorAll('#cartCount').forEach(el => el.textContent = count);
+  updateCartBadge(count);
 }
 
 // ─── Cart Persistence ───
@@ -19,12 +26,11 @@ function getCart() {
 }
 function saveCart(cart) {
   localStorage.setItem('bafanaCart', JSON.stringify(cart));
-  updateCartBadge();
+  syncCartBadge();
 }
 
 // ─── Navigate to cart ───
 function goToCart() {
-  // Open the Shopify cart modal if present
   const shopifyCart = document.getElementById('shopify-cart');
   if (shopifyCart) {
     shopifyCart.showModal();
@@ -52,7 +58,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  updateCartBadge();
+  syncCartBadge();
+
+  // Listen for Shopify cart web component events
+  const events = [
+    'shopify-cart-updated',
+    'shopify-line-added',
+    'shopify-line-removed',
+    'shopify-line-updated',
+    'cart-updated',
+  ];
+  events.forEach(evtName => {
+    document.addEventListener(evtName, syncCartBadge);
+    window.addEventListener(evtName, syncCartBadge);
+  });
+
+  // Also poll the Shopify cart every 2 seconds as a safety net
+  setInterval(syncCartBadge, 2000);
 });
 
 // ─── Modal Controls ───

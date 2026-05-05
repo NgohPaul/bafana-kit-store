@@ -102,7 +102,7 @@
       <!-- Shopify Products List -->
       <shopify-list-context type="product" query="products" first="6">
         <template>
-          <article class="product-card" onclick="getElementById('product-detail-modal').showModal(); getElementById('product-detail-context').update(event);">
+          <article class="product-card" onclick="window.location.href='product.html'">
             <div class="product-card__image-wrap">
               <shopify-media width="300" height="300" query="product.selectedOrFirstAvailableVariant.image"></shopify-media>
               <div class="product-card__badge">Official 2026</div>
@@ -125,8 +125,8 @@
                   <span class="product-card__price-original">R1,499</span>
                   <span class="product-card__price-sale">R999</span>
                 </span>
-                <button class="product-card__cta" onclick="event.stopPropagation(); getElementById('product-detail-modal').showModal(); getElementById('product-detail-context').update(event);">
-                  View
+                <button class="product-card__cta" onclick="event.stopPropagation(); window.location.href='product.html'">
+                  Buy
                 </button>
               </div>
             </div>
@@ -139,60 +139,6 @@
     </div>
   </section>
 
-  <!-- Product Detail Modal -->
-  <dialog id="product-detail-modal" style="padding:0;border:0;border-radius:14px;max-width:860px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
-    <shopify-context id="product-detail-context" type="product" wait-for-update>
-      <template>
-        <div style="position:relative;padding:32px;overflow-x:hidden;">
-          <div style="display:grid;justify-items:end;margin-bottom:12px;">
-            <button onclick="getElementById('product-detail-modal').close();" style="border-radius:8px;width:36px;height:36px;border:1px solid #e5e7eb;cursor:pointer;background:#fff;font-size:16px;">✕</button>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:28px;">
-            <div style="display:flex;flex-direction:row;gap:32px;flex-wrap:wrap;">
-              <div style="flex:1;min-width:280px;display:flex;align-items:center;justify-content:center;background:#f8f7f4;border-radius:12px;padding:20px;">
-                <shopify-media width="400" height="400" query="product.selectedOrFirstAvailableVariant.image"></shopify-media>
-              </div>
-              <div style="flex:1;min-width:280px;display:flex;flex-direction:column;gap:16px;">
-                <div>
-                  <p style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#8a6a1a;margin-bottom:4px;">
-                    <shopify-data query="product.vendor"></shopify-data>
-                  </p>
-                  <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:800;text-transform:uppercase;color:#1a6b3a;margin:0;line-height:1;">
-                    <shopify-data query="product.title"></shopify-data>
-                  </h1>
-                </div>
-                <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:#1a6b3a;">
-                  <shopify-money query="product.selectedOrFirstAvailableVariant.price"></shopify-money>
-                </div>
-
-                <shopify-variant-selector></shopify-variant-selector>
-
-                <div style="display:flex;flex-direction:column;gap:10px;">
-                  <button
-                    onclick="getElementById('shopify-cart').addLine(event).showModal();"
-                    shopify-attr--disabled="!product.selectedOrFirstAvailableVariant.availableForSale"
-                    style="width:100%;padding:14px;background:#1a6b3a;color:#fff;border:none;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;letter-spacing:3px;text-transform:uppercase;cursor:pointer;box-shadow:0 4px 14px rgba(26,107,58,0.3);"
-                  >Add to Cart</button>
-                  <button
-                    onclick="document.querySelector('shopify-store').buyNow(event)"
-                    shopify-attr--disabled="!product.selectedOrFirstAvailableVariant.availableForSale"
-                    style="width:100%;padding:14px;background:#fff;color:#1a6b3a;border:1.5px solid #1a6b3a;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;letter-spacing:3px;text-transform:uppercase;cursor:pointer;"
-                  >Buy Now</button>
-                </div>
-
-                <div style="font-size:14px;line-height:1.8;color:#6b7280;">
-                  <shopify-data query="product.descriptionHtml"></shopify-data>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </template>
-      <div shopify-loading-placeholder class="loading-placeholder">
-        <div class="spinner"></div> Loading product...
-      </div>
-    </shopify-context>
-  </dialog>
 
   <!-- Footer -->
   <footer class="site-footer" role="contentinfo">
