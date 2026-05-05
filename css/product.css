@@ -55,17 +55,42 @@
   border-bottom: 1px solid var(--color-gray-border);
   margin-bottom: 24px;
 }
+.product-info__price-original {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+  opacity: 0.65;
+  line-height: 1;
+  margin-bottom: 4px;
+}
 .product-info__price {
   font-family: var(--font-display);
   font-size: var(--text-4xl);
   color: var(--color-green-primary);
   letter-spacing: 1px;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.product-info__discount-tag {
+  display: inline-block;
+  background: #e11d48;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  vertical-align: middle;
+  animation: pulse-badge 2s ease-in-out infinite;
 }
 .product-info__price-note {
   font-size: var(--text-xs);
   color: var(--color-text-muted);
-  margin-top: 4px;
+  margin-top: 6px;
   letter-spacing: 0.5px;
 }
 

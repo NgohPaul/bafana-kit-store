@@ -1,20 +1,16 @@
-/* ═══════════════════════════════════════════════
-   BAFANA KIT — CANVAS CUSTOMISATION ENGINE
-   ═══════════════════════════════════════════════ */
-
 const CANVAS_SCALE = 2;
-const GOLD_COLOR   = '#C8A84B';
+const PRINT_COLOR  = '#1a6b3a';  // Green print on yellow home jersey
 const NAME_FONT    = "'Barlow Condensed', 'Arial Narrow', sans-serif";
 const NUM_FONT     = "'Bebas Neue', 'Barlow Condensed', sans-serif";
 
-const IMG_FRONT = './images/jersey-front.png';
-const IMG_BACK  = './images/jersey-back.png';
-const IMG_SIDE  = './images/jersey-side.png';
+const IMG_FRONT  = './images/home-jersey-front.png';
+const IMG_BACK   = './images/home-jersey-back.png';
+const IMG_DETAIL = './images/home-jersey-detail.jpg';
 
 const views = [
-  { src: IMG_FRONT, label: 'Front View',             isBack: false },
-  { src: IMG_BACK,  label: 'Back View — Customized', isBack: true  },
-  { src: IMG_SIDE,  label: 'Side View',              isBack: false },
+  { src: IMG_FRONT,  label: 'Front View',             isBack: false },
+  { src: IMG_BACK,   label: 'Back View — Customized', isBack: true  },
+  { src: IMG_DETAIL, label: 'Detail Close-up',         isBack: false },
 ];
 
 // State
@@ -129,12 +125,12 @@ function drawBack() {
     ctx.font         = `900 ${nameFontSize}px ${NAME_FONT}`;
     ctx.textAlign    = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillStyle    = GOLD_COLOR;
-    ctx.shadowColor  = 'rgba(0,0,0,0.35)';
+    ctx.fillStyle    = PRINT_COLOR;
+    ctx.shadowColor  = 'rgba(0,0,0,0.20)';
     ctx.shadowBlur   = 3 * CANVAS_SCALE;
     ctx.shadowOffsetX = 0;
     ctx.shadowOffsetY = 1.5;
-    ctx.globalAlpha  = 0.93;
+    ctx.globalAlpha  = 0.95;
     ctx.transform(1, 0, -0.01, 1, 0, 0);
     ctx.fillText(nameDisplay, cx + dy * 0.01, dy + dh * 0.265);
     ctx.restore();
@@ -148,12 +144,12 @@ function drawBack() {
     ctx.font         = `900 ${numFontSize}px ${NUM_FONT}`;
     ctx.textAlign    = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillStyle    = GOLD_COLOR;
-    ctx.shadowColor  = 'rgba(0,0,0,0.40)';
+    ctx.fillStyle    = PRINT_COLOR;
+    ctx.shadowColor  = 'rgba(0,0,0,0.25)';
     ctx.shadowBlur   = 4 * CANVAS_SCALE;
     ctx.shadowOffsetX = 0;
     ctx.shadowOffsetY = 2;
-    ctx.globalAlpha  = 0.93;
+    ctx.globalAlpha  = 0.95;
     ctx.fillText(numDisplay, cx, dy + dh * 0.525);
     ctx.restore();
   };
