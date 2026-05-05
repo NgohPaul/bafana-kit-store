@@ -1,0 +1,89 @@
+/* ═══════════════════════════════════════════════
+   BAFANA KIT — DESIGN TOKENS
+   ═══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700;800&display=swap');
+
+:root {
+  /* ─── Primary ─── */
+  --color-green-primary:    #1a6b3a;
+  --color-green-dark:       #0d4a22;
+  --color-green-light:      #2a8a4e;
+  --color-green-hero:       #155830;
+
+  /* ─── Gold / Accent ─── */
+  --color-gold-primary:     #b8943c;
+  --color-gold-light:       #c9a84c;
+  --color-gold-text:        #8a6a1a;
+  --color-gold-banner:      #d4a84b;
+
+  /* ─── Neutrals ─── */
+  --color-white:            #ffffff;
+  --color-off-white:        #f8f7f4;
+  --color-image-bg:         #ebebeb;
+  --color-gray-border:      #e5e7eb;
+  --color-gray-bg:          #f3f4f6;
+  --color-text-primary:     #111827;
+  --color-text-muted:       #6b7280;
+  --color-text-placeholder: #cccccc;
+
+  /* ─── Feedback ─── */
+  --color-overlay-dark:     rgba(0,0,0,0.50);
+  --color-shadow-text:      rgba(0,0,0,0.35);
+  --color-nav-bg-glass:     rgba(13,74,34,0.88);
+
+  /* ─── Typography ─── */
+  --font-display:       "Bebas Neue", sans-serif;
+  --font-heading:       "Barlow Condensed", sans-serif;
+  --font-body:          "Barlow", sans-serif;
+
+  --text-xs:    10px;
+  --text-sm:    11px;
+  --text-base:  13px;
+  --text-md:    14px;
+  --text-lg:    15px;
+  --text-xl:    17px;
+  --text-2xl:   24px;
+  --text-3xl:   42px;
+  --text-4xl:   44px;
+  --text-hero:  52px;
+
+  --tracking-wide:     1.5px;
+  --tracking-wider:    2px;
+  --tracking-widest:   3px;
+  --tracking-ultra:    4px;
+
+  /* ─── Spacing ─── */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   10px;
+  --space-4:   12px;
+  --space-5:   14px;
+  --space-6:   16px;
+  --space-8:   20px;
+  --space-10:  24px;
+  --space-12:  28px;
+  --space-16:  40px;
+  --space-20:  48px;
+  --space-24:  60px;
+
+  /* ─── Border Radius ─── */
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-lg:   7px;
+  --radius-xl:   8px;
+  --radius-2xl:  10px;
+  --radius-3xl:  12px;
+  --radius-4xl:  14px;
+  --radius-full: 9999px;
+
+  /* ─── Shadows ─── */
+  --shadow-card:   0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-modal:  0 20px 60px rgba(0,0,0,0.3);
+  --shadow-btn:    0 4px 14px rgba(26,107,58,0.3);
+
+  /* ─── Transitions ─── */
+  --transition-fast:   0.15s ease;
+  --transition-base:   0.2s ease;
+  --transition-slow:   0.3s ease;
+}

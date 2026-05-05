@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bafana Bafana Official Kit 2025 — BafanaKit</title>
+  <meta name="description" content="Buy the official 2025 Bafana Bafana Home Jersey by Adidas × SAFA. Personalise with your name and squad number. Free nationwide delivery. R 1,499.">
+  <meta name="keywords" content="Bafana Bafana, South Africa, football jersey, Adidas, SAFA, 2025 kit, personalised jersey">
+  <meta property="og:title" content="Bafana Bafana Official Kit 2025 — BafanaKit">
+  <meta property="og:description" content="Official 2025 Bafana Bafana Home Jersey. Personalise yours. R 1,499.">
+  <meta property="og:image" content="./images/jersey-front.png">
+  <meta property="og:type" content="product">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.bafanakit.co.za/">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Shopify Web Components -->
+  <script type="module" src="https://cdn.shopify.com/storefront/web-components.js"></script>
+</head>
+<body>
+
+  <!-- Shopify Store Config -->
+  <shopify-store
+    store-domain="https://bafana-bafana-5.myshopify.com"
+    public-access-token="cdb151548aff66750a9460fdbe70d766"
+    country="ZA"
+    language="EN"
+  ></shopify-store>
+
+  <!-- Shopify Cart (global) -->
+  <shopify-cart id="shopify-cart">
+    <div slot="empty">Your cart is empty — go grab a kit! 🇿🇦</div>
+  </shopify-cart>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    🇿🇦 &nbsp; Official 2025 Bafana Bafana Collection — Adidas × SAFA &nbsp; 🇿🇦
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo">
+        Bafana<span class="navbar__logo-accent">Kit</span>
+      </a>
+      <ul class="navbar__links" role="list">
+        <li><a href="collection.html" class="navbar__link">Home Kits</a></li>
+        <li><a href="away.html" class="navbar__link">Away Kits</a></li>
+        <li><a href="accessories.html" class="navbar__link">Accessories</a></li>
+        <li><a href="about.html" class="navbar__link">About SAFA</a></li>
+      </ul>
+      <div class="navbar__actions">
+        <button class="navbar__cart-btn" onclick="goToCart()" aria-label="Shopping cart">
+          🛒 Cart <span class="navbar__cart-count" id="cartCount">0</span>
+        </button>
+        <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="navbar__mobile-drawer" id="mobileDrawer" aria-hidden="true">
+      <ul class="navbar__mobile-links">
+        <li><a href="collection.html">Home Kits</a></li>
+        <li><a href="away.html">Away Kits</a></li>
+        <li><a href="accessories.html">Accessories</a></li>
+        <li><a href="about.html">About SAFA</a></li>
+        <li><a href="#" onclick="goToCart(); return false;">Cart</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__content">
+      <p class="hero__eyebrow">2025 Official Kit — Adidas × SAFA</p>
+      <h1 class="hero__title">
+        <span>Wear the</span>
+        <span class="hero__title-accent">Pride</span>
+        <span>of a Nation</span>
+      </h1>
+      <p class="hero__body">The official 2025 Bafana Bafana Home Jersey. Personalise yours with your name and number.</p>
+      <div class="hero__ctas">
+        <a href="product.html" class="btn btn--gold">Shop the Kit</a>
+        <a href="collection.html" class="btn btn--outline-white">View All Kits</a>
+      </div>
+    </div>
+    <div class="hero__image">
+      <img src="./images/jersey-front.png" alt="2025 Bafana Bafana Home Jersey" loading="eager">
+    </div>
+  </section>
+
+  <!-- Featured Products from Shopify -->
+  <section class="featured-section">
+    <h2 class="featured-section__title">Shop the Collection</h2>
+    <p class="featured-section__subtitle">Official 2025 Bafana Bafana kits and accessories from your Shopify store</p>
+
+    <div class="featured-grid">
+      <!-- Shopify Products List -->
+      <shopify-list-context type="product" query="products" first="6">
+        <template>
+          <article class="product-card" onclick="getElementById('product-detail-modal').showModal(); getElementById('product-detail-context').update(event);">
+            <div class="product-card__image-wrap">
+              <shopify-media width="300" height="300" query="product.selectedOrFirstAvailableVariant.image"></shopify-media>
+              <div class="product-card__badge">Official 2025</div>
+              <button class="product-card__wishlist" aria-label="Add to wishlist" onclick="event.stopPropagation();">♡</button>
+            </div>
+            <div class="product-card__body">
+              <p class="product-card__brand">
+                <shopify-data query="product.vendor"></shopify-data>
+              </p>
+              <h2 class="product-card__name">
+                <shopify-data query="product.title"></shopify-data>
+              </h2>
+              <div class="product-card__rating">
+                <span class="product-card__stars">★★★★★</span>
+                <span class="product-card__review-count">(312)</span>
+              </div>
+              <div class="product-card__footer">
+                <span class="product-card__price">
+                  <shopify-money query="product.selectedOrFirstAvailableVariant.price"></shopify-money>
+                </span>
+                <button class="product-card__cta" onclick="event.stopPropagation(); getElementById('product-detail-modal').showModal(); getElementById('product-detail-context').update(event);">
+                  View
+                </button>
+              </div>
+            </div>
+          </article>
+        </template>
+        <div shopify-loading-placeholder class="loading-placeholder" style="grid-column: 1 / -1;">
+          <div class="spinner"></div> Loading products from store...
+        </div>
+      </shopify-list-context>
+    </div>
+  </section>
+
+  <!-- Product Detail Modal -->
+  <dialog id="product-detail-modal" style="padding:0;border:0;border-radius:14px;max-width:860px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+    <shopify-context id="product-detail-context" type="product" wait-for-update>
+      <template>
+        <div style="position:relative;padding:32px;overflow-x:hidden;">
+          <div style="display:grid;justify-items:end;margin-bottom:12px;">
+            <button onclick="getElementById('product-detail-modal').close();" style="border-radius:8px;width:36px;height:36px;border:1px solid #e5e7eb;cursor:pointer;background:#fff;font-size:16px;">✕</button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:28px;">
+            <div style="display:flex;flex-direction:row;gap:32px;flex-wrap:wrap;">
+              <div style="flex:1;min-width:280px;display:flex;align-items:center;justify-content:center;background:#f8f7f4;border-radius:12px;padding:20px;">
+                <shopify-media width="400" height="400" query="product.selectedOrFirstAvailableVariant.image"></shopify-media>
+              </div>
+              <div style="flex:1;min-width:280px;display:flex;flex-direction:column;gap:16px;">
+                <div>
+                  <p style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#8a6a1a;margin-bottom:4px;">
+                    <shopify-data query="product.vendor"></shopify-data>
+                  </p>
+                  <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:800;text-transform:uppercase;color:#1a6b3a;margin:0;line-height:1;">
+                    <shopify-data query="product.title"></shopify-data>
+                  </h1>
+                </div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:#1a6b3a;">
+                  <shopify-money query="product.selectedOrFirstAvailableVariant.price"></shopify-money>
+                </div>
+
+                <shopify-variant-selector></shopify-variant-selector>
+
+                <div style="display:flex;flex-direction:column;gap:10px;">
+                  <button
+                    onclick="getElementById('shopify-cart').addLine(event).showModal();"
+                    shopify-attr--disabled="!product.selectedOrFirstAvailableVariant.availableForSale"
+                    style="width:100%;padding:14px;background:#1a6b3a;color:#fff;border:none;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;letter-spacing:3px;text-transform:uppercase;cursor:pointer;box-shadow:0 4px 14px rgba(26,107,58,0.3);"
+                  >Add to Cart</button>
+                  <button
+                    onclick="document.querySelector('shopify-store').buyNow(event)"
+                    shopify-attr--disabled="!product.selectedOrFirstAvailableVariant.availableForSale"
+                    style="width:100%;padding:14px;background:#fff;color:#1a6b3a;border:1.5px solid #1a6b3a;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;letter-spacing:3px;text-transform:uppercase;cursor:pointer;"
+                  >Buy Now</button>
+                </div>
+
+                <div style="font-size:14px;line-height:1.8;color:#6b7280;">
+                  <shopify-data query="product.descriptionHtml"></shopify-data>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+      <div shopify-loading-placeholder class="loading-placeholder">
+        <div class="spinner"></div> Loading product...
+      </div>
+    </shopify-context>
+  </dialog>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand">
+        <div class="site-footer__logo">Bafana<span>Kit</span></div>
+        <p class="site-footer__tagline">Official Adidas × SAFA Licensed Retailer</p>
+        <p class="site-footer__tagline">Ke Nako. It's Time.</p>
+      </div>
+      <div class="site-footer__links">
+        <div class="site-footer__col">
+          <h3 class="site-footer__col-title">Shop</h3>
+          <ul>
+            <li><a href="collection.html">Home Kits</a></li>
+            <li><a href="away.html">Away Kits</a></li>
+            <li><a href="accessories.html">Accessories</a></li>
+          </ul>
+        </div>
+        <div class="site-footer__col">
+          <h3 class="site-footer__col-title">Help</h3>
+          <ul>
+            <li><a href="product.html#tab-size">Size Guide</a></li>
+            <li><a href="product.html#tab-delivery">Delivery Info</a></li>
+            <li><a href="about.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="site-footer__col">
+          <h3 class="site-footer__col-title">Company</h3>
+          <ul>
+            <li><a href="about.html">About SAFA</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <p>&copy; 2025 <strong>Bafana Kit</strong>. All rights reserved. Official Licensed Retailer of SAFA &amp; Adidas.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

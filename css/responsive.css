@@ -1,0 +1,65 @@
+/* ═══════════════════════════════════════════════
+   BAFANA KIT — RESPONSIVE BREAKPOINTS
+   ═══════════════════════════════════════════════ */
+
+@media (max-width: 1200px) {
+  .product-page { grid-template-columns: 1fr 460px; }
+}
+
+@media (max-width: 960px) {
+  .product-page { grid-template-columns: 1fr; }
+  .product-info {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid var(--color-gray-border);
+    padding-top: 32px;
+  }
+  .gallery { padding-right: 0; margin-bottom: 32px; }
+  .gallery__stage { height: 380px; }
+  .hero { grid-template-columns: 1fr; }
+  .collection-grid { grid-template-columns: repeat(2, 1fr); }
+  .featured-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .navbar__links { display: none; }
+  .navbar__hamburger { display: flex; }
+  .navbar__inner { padding: 0 20px; }
+  .product-page { padding: 24px 20px 40px; }
+  .product-tabs { padding: 0 20px 40px; }
+  .product-tabs__nav { overflow-x: auto; gap: 0; }
+  .product-tabs__btn { white-space: nowrap; padding: 12px 16px; font-size: 12px; }
+  .trust-badges { flex-wrap: wrap; gap: 16px; }
+  .trust-badge { min-width: 40%; }
+  .gallery__stage { height: 320px; }
+  .product-info__title-line { font-size: 34px; }
+  .product-info__price { font-size: 36px; }
+  .customiser__size-grid { flex-wrap: wrap; }
+  .size-pill { min-width: calc(33.333% - 5px); flex: none; }
+  .site-footer__inner { grid-template-columns: 1fr; padding: 40px 24px; }
+  .site-footer__links { grid-template-columns: repeat(2, 1fr); }
+  .announcement-bar { font-size: 10px; letter-spacing: 1.5px; }
+  .hero { grid-template-columns: 1fr; padding: 60px 24px; text-align: center; }
+  .hero__image { order: -1; }
+  .hero__body { margin-left: auto; margin-right: auto; }
+  .hero__ctas { justify-content: center; }
+  .collection-grid { grid-template-columns: repeat(2, 1fr); padding: 0 20px 40px; gap: 16px; }
+  .featured-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .collection-header { padding: 32px 20px 24px; }
+  .breadcrumb { padding: 12px 20px; }
+  .cart-page { padding: 24px 20px; }
+  .checkout-page { padding: 24px 20px; }
+  .about-content { padding: 40px 20px; }
+  .cart-item { grid-template-columns: 80px 1fr; gap: 12px; }
+  .cart-item__price { grid-column: 2; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 48px 20px; }
+  .hero__title { font-size: 48px; }
+  .gallery__thumbs { gap: 8px; }
+  .gallery__thumb { width: 70px; height: 70px; }
+  .modal { padding: 28px 20px; }
+  .collection-grid { grid-template-columns: 1fr; }
+  .featured-grid { grid-template-columns: 1fr; }
+}

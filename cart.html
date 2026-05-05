@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart — BafanaKit</title>
+  <meta name="description" content="Review your Bafana Bafana kit order before checkout.">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script type="module" src="https://cdn.shopify.com/storefront/web-components.js"></script>
+</head>
+<body>
+
+  <shopify-store store-domain="https://bafana-bafana-5.myshopify.com" public-access-token="cdb151548aff66750a9460fdbe70d766" country="ZA" language="EN"></shopify-store>
+  <shopify-cart id="shopify-cart"><div slot="empty">Your cart is empty — go grab a kit! 🇿🇦</div></shopify-cart>
+
+  <div class="announcement-bar">🇿🇦 &nbsp; Official 2025 Bafana Bafana Collection — Adidas × SAFA &nbsp; 🇿🇦</div>
+
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo">Bafana<span class="navbar__logo-accent">Kit</span></a>
+      <ul class="navbar__links" role="list">
+        <li><a href="collection.html" class="navbar__link">Home Kits</a></li>
+        <li><a href="away.html" class="navbar__link">Away Kits</a></li>
+        <li><a href="accessories.html" class="navbar__link">Accessories</a></li>
+        <li><a href="about.html" class="navbar__link">About SAFA</a></li>
+      </ul>
+      <div class="navbar__actions">
+        <button class="navbar__cart-btn" onclick="goToCart()" aria-label="Shopping cart">🛒 Cart <span class="navbar__cart-count" id="cartCount">0</span></button>
+        <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+    <div class="navbar__mobile-drawer" id="mobileDrawer" aria-hidden="true">
+      <ul class="navbar__mobile-links"><li><a href="collection.html">Home Kits</a></li><li><a href="away.html">Away Kits</a></li><li><a href="accessories.html">Accessories</a></li><li><a href="about.html">About SAFA</a></li><li><a href="#" onclick="goToCart(); return false;">Cart</a></li></ul>
+    </div>
+  </nav>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol class="breadcrumb__list"><li><a href="index.html">Home</a></li><li aria-hidden="true">/</li><li aria-current="page">Cart</li></ol>
+  </nav>
+
+  <main class="cart-page">
+    <h1 class="cart-page__title">Your Cart</h1>
+
+    <!-- Shopify Cart Prompt -->
+    <div style="background: var(--color-off-white); border-radius: 10px; padding: 20px; margin-bottom: 24px; border: 1px solid var(--color-gray-border); display: flex; align-items: center; gap: 12px;">
+      <span style="font-size: 24px;">🛒</span>
+      <div>
+        <p style="font-size: 14px; font-weight: 700; color: var(--color-green-primary); margin-bottom: 2px;">Shopify Cart</p>
+        <p style="font-size: 13px; color: var(--color-text-muted);">Products added from the store go to the Shopify cart.
+          <button onclick="goToCart()" style="background: none; border: none; color: var(--color-green-primary); font-weight: 700; cursor: pointer; text-decoration: underline; font-size: 13px;">Open Shopify Cart →</button>
+        </p>
+      </div>
+    </div>
+
+    <!-- Custom Cart Items (personalised jerseys) -->
+    <h2 style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; text-transform: uppercase; color: var(--color-text-primary); margin-bottom: 16px; letter-spacing: 1px;">Personalised Items</h2>
+    <div id="cartItemsList"></div>
+
+    <div class="cart-summary">
+      <div class="cart-summary__row">
+        <span class="cart-summary__label">Subtotal</span>
+        <span class="cart-summary__value" id="cartTotal">R 0</span>
+      </div>
+      <p class="cart-summary__note">Shipping calculated at checkout. Free standard delivery on all orders.</p>
+      <a href="checkout.html" class="btn btn--primary" style="text-align:center;">Proceed to Checkout</a>
+      <a href="collection.html" class="btn btn--secondary" style="text-align:center;margin-top:10px;">Continue Shopping</a>
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand"><div class="site-footer__logo">Bafana<span>Kit</span></div><p class="site-footer__tagline">Official Adidas × SAFA Licensed Retailer</p><p class="site-footer__tagline">Ke Nako. It's Time.</p></div>
+      <div class="site-footer__links">
+        <div class="site-footer__col"><h3 class="site-footer__col-title">Shop</h3><ul><li><a href="collection.html">Home Kits</a></li><li><a href="away.html">Away Kits</a></li><li><a href="accessories.html">Accessories</a></li></ul></div>
+        <div class="site-footer__col"><h3 class="site-footer__col-title">Help</h3><ul><li><a href="product.html">Size Guide</a></li><li><a href="product.html">Delivery Info</a></li><li><a href="about.html">Contact Us</a></li></ul></div>
+        <div class="site-footer__col"><h3 class="site-footer__col-title">Company</h3><ul><li><a href="about.html">About SAFA</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div>
+      </div>
+    </div>
+    <div class="site-footer__bottom"><p>&copy; 2025 <strong>Bafana Kit</strong>. All rights reserved.</p></div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>

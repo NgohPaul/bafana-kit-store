@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About SAFA — BafanaKit</title>
+  <meta name="description" content="Learn about the South African Football Association (SAFA) and the heritage behind Bafana Bafana.">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script type="module" src="https://cdn.shopify.com/storefront/web-components.js"></script>
+</head>
+<body>
+
+  <shopify-store store-domain="https://bafana-bafana-5.myshopify.com" public-access-token="cdb151548aff66750a9460fdbe70d766" country="ZA" language="EN"></shopify-store>
+  <shopify-cart id="shopify-cart"><div slot="empty">Your cart is empty — go grab a kit! 🇿🇦</div></shopify-cart>
+
+  <div class="announcement-bar">🇿🇦 &nbsp; Official 2025 Bafana Bafana Collection — Adidas × SAFA &nbsp; 🇿🇦</div>
+
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo">Bafana<span class="navbar__logo-accent">Kit</span></a>
+      <ul class="navbar__links" role="list">
+        <li><a href="collection.html" class="navbar__link">Home Kits</a></li>
+        <li><a href="away.html" class="navbar__link">Away Kits</a></li>
+        <li><a href="accessories.html" class="navbar__link">Accessories</a></li>
+        <li><a href="about.html" class="navbar__link active">About SAFA</a></li>
+      </ul>
+      <div class="navbar__actions">
+        <button class="navbar__cart-btn" onclick="goToCart()" aria-label="Shopping cart">🛒 Cart <span class="navbar__cart-count" id="cartCount">0</span></button>
+        <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+    <div class="navbar__mobile-drawer" id="mobileDrawer" aria-hidden="true">
+      <ul class="navbar__mobile-links"><li><a href="collection.html">Home Kits</a></li><li><a href="away.html">Away Kits</a></li><li><a href="accessories.html">Accessories</a></li><li><a href="about.html">About SAFA</a></li><li><a href="#" onclick="goToCart(); return false;">Cart</a></li></ul>
+    </div>
+  </nav>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol class="breadcrumb__list"><li><a href="index.html">Home</a></li><li aria-hidden="true">/</li><li aria-current="page">About SAFA</li></ol>
+  </nav>
+
+  <!-- About Hero -->
+  <section class="about-hero">
+    <h1 class="about-hero__title">About SAFA</h1>
+    <p class="about-hero__subtitle">The South African Football Association — custodians of the beautiful game in the Rainbow Nation since 1991.</p>
+  </section>
+
+  <!-- About Content -->
+  <div class="about-content">
+    <h2>Our Heritage</h2>
+    <p>The South African Football Association (SAFA) was founded in 1991, unifying football governance in South Africa following the end of apartheid. SAFA is the governing body of football in the country, responsible for the national teams, domestic leagues, and grassroots development programmes that nurture the next generation of South African footballers.</p>
+    <p>Bafana Bafana — meaning "The Boys, The Boys" in Zulu — is the beloved nickname of the South African men's national football team. The name was coined by fans during the early 1990s and has since become synonymous with South African football pride and identity.</p>
+
+    <h2>1996 African Cup of Nations</h2>
+    <p>South Africa's greatest footballing moment came in 1996 when Bafana Bafana hosted and won the Africa Cup of Nations on home soil. Under head coach Clive Barker, the team captained by Neil Tovey defeated Tunisia 2-0 in the final at FNB Stadium, with goals from Mark Williams. The victory united the nation and remains a defining moment in South African sporting history.</p>
+
+    <h2>The 2025 Kit</h2>
+    <p>The 2025 Bafana Bafana Home Jersey represents a partnership between Adidas and SAFA to create a kit worthy of the national team's legacy. The bold forest-green colourway pays homage to the national colours, while the gold accents recall the trophy-lifting glory of 1996. A subtle Ndebele-inspired jacquard pattern woven into the fabric celebrates South Africa's rich cultural tapestry.</p>
+    <p>Every jersey sold through BafanaKit contributes directly to SAFA's youth development initiatives, funding coaching programmes, tournament access, and equipment for aspiring young footballers across all nine provinces.</p>
+
+    <h2>Ke Nako — It's Time</h2>
+    <p>"Ke Nako" is a Sesotho phrase meaning "It's Time." Used as the rallying cry during the 2010 FIFA World Cup, it represents the spirit of a nation coming together through football. We carry that spirit in every kit we ship.</p>
+
+    <h2>Contact Us</h2>
+    <p>For orders, returns, or general enquiries, reach us at <strong>hello@bafanakit.co.za</strong> or call <strong>+27 11 123 4567</strong> (Mon–Fri, 8am–5pm SAST).</p>
+    <p>For returns and exchanges: <strong>returns@bafanakit.co.za</strong></p>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand"><div class="site-footer__logo">Bafana<span>Kit</span></div><p class="site-footer__tagline">Official Adidas × SAFA Licensed Retailer</p><p class="site-footer__tagline">Ke Nako. It's Time.</p></div>
+      <div class="site-footer__links">
+        <div class="site-footer__col"><h3 class="site-footer__col-title">Shop</h3><ul><li><a href="collection.html">Home Kits</a></li><li><a href="away.html">Away Kits</a></li><li><a href="accessories.html">Accessories</a></li></ul></div>
+        <div class="site-footer__col"><h3 class="site-footer__col-title">Help</h3><ul><li><a href="product.html">Size Guide</a></li><li><a href="product.html">Delivery Info</a></li><li><a href="about.html">Contact Us</a></li></ul></div>
+        <div class="site-footer__col"><h3 class="site-footer__col-title">Company</h3><ul><li><a href="about.html">About SAFA</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div>
+      </div>
+    </div>
+    <div class="site-footer__bottom"><p>&copy; 2025 <strong>Bafana Kit</strong>. All rights reserved.</p></div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
