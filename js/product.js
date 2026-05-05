@@ -21,13 +21,13 @@ function addToCart() {
 
   const item = {
     id:       Date.now(),
-    product:  'Bafana Bafana Home Jersey 2025',
+    product:  'Bafana Bafana Home Jersey 2026',
     name:     name || 'No name',
     number:   state.playerNumber,
     size:     state.playerSize,
-    price:    1499,
+    price:    999,
     qty:      1,
-    image:    './images/jersey-front.png',
+    image:    './images/home-jersey-front.png',
   };
 
   // Save to custom local cart
@@ -56,13 +56,13 @@ function buyNow() {
 
   const item = {
     id:      Date.now(),
-    product: 'Bafana Bafana Home Jersey 2025',
+    product: 'Bafana Bafana Home Jersey 2026',
     name,
     number:  state.playerNumber,
     size:    state.playerSize,
-    price:   1499,
+    price:   999,
     qty:     1,
-    image:   './images/jersey-front.png',
+    image:   './images/home-jersey-front.png',
   };
 
   const cart = getCart();
