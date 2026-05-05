@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bafana Bafana Away Jersey 2026 — BafanaKit</title>
+  <meta name="description" content="Buy the official 2026 Bafana Bafana Away Jersey by Adidas × SAFA. Personalise with your name and squad number. Free nationwide delivery. R 999.">
+  <meta property="og:title" content="Bafana Bafana Away Jersey 2026 — BafanaKit">
+  <meta property="og:description" content="Official 2026 Bafana Bafana Away Jersey. Personalise yours. R 999.">
+  <meta property="og:image" content="./images/jersey-front.png">
+  <meta property="og:type" content="product">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.bafanakit.co.za/away-product.html">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/product.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Shopify Web Components -->
+  <script type="module" src="https://cdn.shopify.com/storefront/web-components.js"></script>
+</head>
+<body>
+
+  <!-- Shopify Store Config -->
+  <shopify-store
+    store-domain="https://bafana-bafana-5.myshopify.com"
+    public-access-token="cdb151548aff66750a9460fdbe70d766"
+    country="ZA"
+    language="EN"
+  ></shopify-store>
+
+  <!-- Shopify Cart (global) -->
+  <shopify-cart id="shopify-cart">
+    <div slot="empty">Your cart is empty — go grab a kit! 🇿🇦</div>
+  </shopify-cart>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    🇿🇦 &nbsp; Official 2026 Bafana Bafana Collection — Adidas × SAFA &nbsp; 🇿🇦
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo">
+        Bafana<span class="navbar__logo-accent">Kit</span>
+      </a>
+      <ul class="navbar__links" role="list">
+        <li><a href="collection.html" class="navbar__link">Home Kits</a></li>
+        <li><a href="away.html" class="navbar__link">Away Kits</a></li>
+        <li><a href="accessories.html" class="navbar__link">Accessories</a></li>
+        <li><a href="about.html" class="navbar__link">About SAFA</a></li>
+      </ul>
+      <div class="navbar__actions">
+        <button class="navbar__cart-btn" onclick="goToCart()" aria-label="Shopping cart">
+          🛒 Cart <span class="navbar__cart-count" id="cartCount">0</span>
+        </button>
+        <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="navbar__mobile-drawer" id="mobileDrawer" aria-hidden="true">
+      <ul class="navbar__mobile-links">
+        <li><a href="collection.html">Home Kits</a></li>
+        <li><a href="away.html">Away Kits</a></li>
+        <li><a href="accessories.html">Accessories</a></li>
+        <li><a href="about.html">About SAFA</a></li>
+        <li><a href="#" onclick="goToCart(); return false;">Cart</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol class="breadcrumb__list">
+      <li><a href="index.html">Home</a></li>
+      <li aria-hidden="true">/</li>
+      <li><a href="away.html">Away Kits</a></li>
+      <li aria-hidden="true">/</li>
+      <li aria-current="page">Bafana Bafana Away Jersey 2026</li>
+    </ol>
+  </nav>
+
+  <!-- Product Page -->
+  <main class="product-page">
+
+    <!-- Left Column: Gallery -->
+    <div class="gallery" id="gallery">
+      <div class="gallery__stage" id="galleryStage">
+        <img
+          class="gallery__main-img"
+          id="mainProductImg"
+          src="./images/jersey-front.png"
+          alt="Bafana Bafana Away Jersey - Front View"
+          loading="eager"
+        />
+        <canvas id="customCanvas" class="gallery__canvas" aria-label="Customised jersey back view"></canvas>
+        <div class="gallery__badge" id="viewBadge">Front View</div>
+        <div class="gallery__zoom-hint">Click to zoom</div>
+      </div>
+
+      <p class="gallery__hint" id="previewHint" role="status" aria-live="polite">
+        ✦ Live preview updated — see the back view
+      </p>
+
+      <div class="gallery__thumbs" role="list" aria-label="Product views">
+        <div class="gallery__thumb active" role="listitem" onclick="switchView(0)" tabindex="0" aria-label="Front view">
+          <img src="./images/jersey-front.png" alt="Front view">
+        </div>
+        <div class="gallery__thumb" role="listitem" onclick="switchView(1)" tabindex="0" aria-label="Back view — customise">
+          <img src="./images/jersey-back.png" alt="Back view">
+        </div>
+        <div class="gallery__thumb" role="listitem" onclick="switchView(2)" tabindex="0" aria-label="Side view">
+          <img src="./images/jersey-side.png" alt="Side view">
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Product Info -->
+    <div class="product-info">
+      <p class="product-info__brand">Adidas × SAFA Official</p>
+
+      <h1 class="product-info__title">
+        <span class="product-info__title-line product-info__title-line--green">Bafana Bafana</span>
+        <span class="product-info__title-line product-info__title-line--gold">Away Jersey</span>
+      </h1>
+
+      <div class="product-info__rating" aria-label="Rated 4.9 out of 5, 312 reviews">
+        <span class="product-info__stars" aria-hidden="true">★★★★★</span>
+        <span class="product-info__review-count">4.9 &nbsp;(312 reviews)</span>
+        <a href="#reviews" class="product-info__review-link">Read reviews</a>
+      </div>
+
+      <div class="product-info__price-block">
+        <p class="product-info__price-original">R 1,499</p>
+        <p class="product-info__price">R 999</p>
+        <p class="product-info__price-note">Incl. VAT &bull; Free nationwide delivery &bull; 30-day returns</p>
+      </div>
+
+      <!-- Customiser -->
+      <div class="customiser">
+        <div class="customiser__header">
+          <span class="customiser__bar"></span>
+          <span class="customiser__title">Personalise Your Jersey</span>
+        </div>
+
+        <div class="customiser__field">
+          <label class="customiser__label" for="nameInput">Player Name</label>
+          <input
+            class="customiser__input"
+            type="text"
+            id="nameInput"
+            name="playerName"
+            maxlength="14"
+            placeholder="Enter player name"
+            autocomplete="off"
+            spellcheck="false"
+            oninput="onNameInput(this.value)"
+          >
+        </div>
+
+        <div class="customiser__field">
+          <label class="customiser__label">Squad Number</label>
+          <div class="customiser__number-grid" role="group" aria-label="Quick number select">
+            <button class="num-pill" onclick="onNumberChange(1,  this)" aria-label="Number 1">1</button>
+            <button class="num-pill" onclick="onNumberChange(4,  this)" aria-label="Number 4">4</button>
+            <button class="num-pill" onclick="onNumberChange(7,  this)" aria-label="Number 7">7</button>
+            <button class="num-pill active" onclick="onNumberChange(10, this)" aria-label="Number 10">10</button>
+            <button class="num-pill" onclick="onNumberChange(11, this)" aria-label="Number 11">11</button>
+            <button class="num-pill" onclick="onNumberChange(23, this)" aria-label="Number 23">23</button>
+          </div>
+          <div class="customiser__custom-num-row">
+            <input
+              class="customiser__num-input"
+              type="number"
+              id="customNumInput"
+              min="1" max="99"
+              placeholder="##"
+              aria-label="Custom squad number"
+              oninput="onNumberChange(this.value, null, true)"
+            >
+            <span class="customiser__num-label">custom number</span>
+          </div>
+        </div>
+
+        <div class="customiser__field customiser__field--last">
+          <label class="customiser__label">Size</label>
+          <div class="customiser__size-grid" role="group" aria-label="Select size">
+            <button class="size-pill" onclick="onSizeChange(this)">XS</button>
+            <button class="size-pill" onclick="onSizeChange(this)">S</button>
+            <button class="size-pill active" onclick="onSizeChange(this)">M</button>
+            <button class="size-pill" onclick="onSizeChange(this)">L</button>
+            <button class="size-pill" onclick="onSizeChange(this)">XL</button>
+            <button class="size-pill" onclick="onSizeChange(this)">XXL</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTAs -->
+      <div class="product-info__ctas">
+        <button class="btn btn--primary" onclick="addToCart()">
+          Add to Cart — R 999
+        </button>
+        <button class="btn btn--secondary" onclick="buyNow()">
+          Buy Now
+        </button>
+      </div>
+
+      <!-- Trust badges -->
+      <div class="trust-badges">
+        <div class="trust-badge">
+          <span class="trust-badge__icon" aria-hidden="true">✅</span>
+          <span class="trust-badge__label">100% Official</span>
+        </div>
+        <div class="trust-badge">
+          <span class="trust-badge__icon" aria-hidden="true">🚚</span>
+          <span class="trust-badge__label">Free Delivery</span>
+        </div>
+        <div class="trust-badge">
+          <span class="trust-badge__icon" aria-hidden="true">↩️</span>
+          <span class="trust-badge__label">30-Day Returns</span>
+        </div>
+        <div class="trust-badge">
+          <span class="trust-badge__icon" aria-hidden="true">🔒</span>
+          <span class="trust-badge__label">Secure Pay</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Product Tabs -->
+  <section class="product-tabs" aria-label="Product information">
+    <div class="product-tabs__inner">
+      <div class="product-tabs__nav" role="tablist">
+        <button class="product-tabs__btn active" role="tab" aria-selected="true" aria-controls="tab-desc" onclick="switchTab(this,'desc')">Description</button>
+        <button class="product-tabs__btn" role="tab" aria-selected="false" aria-controls="tab-size" onclick="switchTab(this,'size')">Size Guide</button>
+        <button class="product-tabs__btn" role="tab" aria-selected="false" aria-controls="tab-delivery" onclick="switchTab(this,'delivery')">Delivery &amp; Returns</button>
+      </div>
+
+      <div class="product-tabs__panel active" id="tab-desc" role="tabpanel" tabindex="0">
+        <p>The <strong>2026 Bafana Bafana Away Jersey</strong> is an official Adidas × SAFA collaboration that embodies the fierce spirit of South African football on the road. The bold forest-green colourway with authentic gold Adidas three-stripe detailing and embroidered SAFA crest pays tribute to decades of South African football passion.</p>
+        <p>Crafted from premium recycled polyester with Adidas's AEROREADY moisture-wicking technology, it keeps you cool and dry whether you're watching from the stands or playing on the pitch. A subtle jacquard-inspired geometric pattern is woven directly into the fabric, celebrating the rich cultural heritage of the nation.</p>
+        <p>Personalise your jersey with your name and squad number, printed in official gold heat-transfer lettering by Adidas's print partners. Each personalised jersey ships in a limited-edition SAFA gift box.</p>
+        <ul class="product-tabs__features">
+          <li>✦ 100% official licensed Adidas × SAFA product</li>
+          <li>✦ AEROREADY moisture-wicking recycled polyester</li>
+          <li>✦ Embroidered SAFA crest on chest</li>
+          <li>✦ Adidas Originals trefoil logo</li>
+          <li>✦ Jacquard-inspired geometric woven pattern</li>
+          <li>✦ Gold heat-transfer name and number printing available</li>
+          <li>✦ Machine washable at 30°C, do not tumble dry</li>
+        </ul>
+      </div>
+
+      <div class="product-tabs__panel" id="tab-size" role="tabpanel" tabindex="0">
+        <p>All measurements are in centimetres. For the best fit, measure your chest at its widest point. If you are between sizes, we recommend sizing up.</p>
+        <table class="size-guide-table" aria-label="Jersey size guide">
+          <thead>
+            <tr>
+              <th scope="col">Size</th>
+              <th scope="col">Chest (cm)</th>
+              <th scope="col">Length (cm)</th>
+              <th scope="col">Shoulder (cm)</th>
+              <th scope="col">Sleeve (cm)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>XS</td><td>86–91</td><td>68</td><td>42</td><td>20</td></tr>
+            <tr><td>S</td><td>91–96</td><td>70</td><td>44</td><td>21</td></tr>
+            <tr><td>M</td><td>96–101</td><td>72</td><td>46</td><td>22</td></tr>
+            <tr><td>L</td><td>101–106</td><td>74</td><td>48</td><td>23</td></tr>
+            <tr><td>XL</td><td>106–111</td><td>76</td><td>50</td><td>24</td></tr>
+            <tr><td>XXL</td><td>111–116</td><td>78</td><td>52</td><td>25</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="product-tabs__panel" id="tab-delivery" role="tabpanel" tabindex="0">
+        <p><strong>Free Standard Delivery</strong> — 3 to 5 business days to all major centres in South Africa. Personalised jerseys may require an additional 1–2 business days for print processing.</p>
+        <p><strong>Express Delivery</strong> — R99 for next-business-day delivery to Johannesburg, Cape Town, Durban, Pretoria, and Port Elizabeth. Order before 12:00pm to qualify.</p>
+        <p><strong>International Shipping</strong> — Available to select countries. Rates calculated at checkout. Delivery times vary by destination (7–21 business days).</p>
+        <p><strong>Returns Policy</strong> — Unpersonalised items in original condition with tags attached may be returned within 30 days for a full refund or exchange. Personalised jerseys (with a custom name or number) are non-returnable unless the item is faulty or incorrectly printed. To initiate a return, email returns@bafanakit.co.za with your order number.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Add to Cart Modal -->
+  <div class="modal-overlay" id="cartModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal" role="document">
+      <button class="modal__close-x" onclick="closeModal()" aria-label="Close modal">✕</button>
+      <div class="modal__icon" aria-hidden="true">🇿🇦</div>
+      <h2 class="modal__title" id="modalTitle">Added to Cart!</h2>
+      <p class="modal__subtitle">Your custom Bafana Bafana jersey is ready. Ke Nako!</p>
+      <div class="modal__order-summary" id="orderSummary" aria-label="Order summary"></div>
+      <div class="modal__actions">
+        <button class="btn btn--primary" onclick="goToCart()">View Cart</button>
+        <button class="btn btn--secondary" onclick="closeModal()">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand">
+        <div class="site-footer__logo">Bafana<span>Kit</span></div>
+        <p class="site-footer__tagline">Official Adidas × SAFA Licensed Retailer</p>
+        <p class="site-footer__tagline">Ke Nako. It's Time.</p>
+      </div>
+      <div class="site-footer__links">
+        <div class="site-footer__col">
+          <h3 class="site-footer__col-title">Shop</h3>
+          <ul>
+            <li><a href="collection.html">Home Kits</a></li>
+            <li><a href="away.html">Away Kits</a></li>
+            <li><a href="accessories.html">Accessories</a></li>
+          </ul>
+        </div>
+        <div class="site-footer__col">
+          <h3 class="site-footer__col-title">Help</h3>
+          <ul>
+            <li><a href="#tab-size" onclick="switchTab(document.querySelectorAll('.product-tabs__btn')[1],'size')">Size Guide</a></li>
+            <li><a href="#tab-delivery" onclick="switchTab(document.querySelectorAll('.product-tabs__btn')[2],'delivery')">Delivery Info</a></li>
+            <li><a href="about.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="site-footer__col">
+          <h3 class="site-footer__col-title">Company</h3>
+          <ul>
+            <li><a href="about.html">About SAFA</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <p>&copy; 2025 <strong>Bafana Kit</strong>. All rights reserved. Official Licensed Retailer of SAFA &amp; Adidas.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=3"></script>
+  <script src="js/away-canvas.js?v=3"></script>
+  <script src="js/away-product.js?v=3"></script>
+</body>
+</html>

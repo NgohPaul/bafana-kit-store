@@ -102,7 +102,7 @@
       <!-- Shopify Products List -->
       <shopify-list-context type="product" query="products" first="6">
         <template>
-          <article class="product-card" onclick="window.location.href='product.html'">
+          <article class="product-card" onclick="navigateToProduct(this)">
             <div class="product-card__image-wrap">
               <shopify-media width="300" height="300" query="product.selectedOrFirstAvailableVariant.image"></shopify-media>
               <div class="product-card__badge">Official 2026</div>
@@ -125,7 +125,7 @@
                   <span class="product-card__price-original">R1,499</span>
                   <span class="product-card__price-sale">R999</span>
                 </span>
-                <button class="product-card__cta" onclick="event.stopPropagation(); window.location.href='product.html'">
+                <button class="product-card__cta" onclick="event.stopPropagation(); navigateToProduct(this.closest('.product-card'))">
                   Buy
                 </button>
               </div>

@@ -1,3 +1,14 @@
+// ─── Product Routing ───
+function navigateToProduct(card) {
+  const titleEl = card.querySelector('.product-card__name');
+  const title = (titleEl ? titleEl.textContent : '').trim().toLowerCase();
+  if (title.includes('away')) {
+    window.location.href = 'away-product.html';
+  } else {
+    window.location.href = 'product.html';
+  }
+}
+
 // ─── Cart Badge ───
 function updateCartBadge(count) {
   document.querySelectorAll('#cartCount').forEach(el => el.textContent = count ?? '0');
