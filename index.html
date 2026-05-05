@@ -138,6 +138,24 @@
   </section>
 
 
+  <!-- Testimonials Section -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="testimonials-section__header">
+      <p class="testimonials-section__eyebrow">Fan Reviews</p>
+      <h2 class="testimonials-section__title">What Bafana Fans Are Saying</h2>
+    </div>
+
+    <div class="testimonials-carousel" id="testimonialsCarousel">
+      <!-- Cards injected by JS -->
+    </div>
+
+    <div class="testimonials-nav">
+      <button class="testimonials-nav__btn" id="testimPrev" aria-label="Previous testimonial">&#8592;</button>
+      <div class="testimonials-dots" id="testimDots"></div>
+      <button class="testimonials-nav__btn" id="testimNext" aria-label="Next testimonial">&#8594;</button>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer class="site-footer" role="contentinfo">
     <div class="site-footer__inner">
@@ -178,6 +196,192 @@
     </div>
   </footer>
 
+  <style>
+    /* ── Testimonials Section ── */
+    .testimonials-section {
+      background: #0a1628;
+      padding: 80px 24px 90px;
+      overflow: hidden;
+    }
+    .testimonials-section__header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .testimonials-section__eyebrow {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #C8A84B;
+      margin-bottom: 12px;
+    }
+    .testimonials-section__title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      color: #fff;
+      margin: 0;
+    }
+
+    /* Carousel track */
+    .testimonials-carousel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      perspective: 1000px;
+      min-height: 360px;
+      position: relative;
+    }
+
+    /* Individual card */
+    .testim-card {
+      background: #111e35;
+      border: 1px solid rgba(200,168,75,0.18);
+      border-radius: 20px;
+      padding: 32px 28px;
+      width: 320px;
+      max-width: 88vw;
+      flex-shrink: 0;
+      transition: transform 0.5s cubic-bezier(.4,0,.2,1), opacity 0.5s ease, box-shadow 0.5s ease;
+      cursor: pointer;
+      position: relative;
+    }
+    .testim-card--active {
+      transform: scale(1) rotateY(0deg);
+      opacity: 1;
+      box-shadow: 0 20px 60px rgba(200,168,75,0.18), 0 0 0 2px rgba(200,168,75,0.35);
+      z-index: 2;
+    }
+    .testim-card--left {
+      transform: scale(0.88) rotateY(12deg) translateX(-20px);
+      opacity: 0.5;
+      z-index: 1;
+    }
+    .testim-card--right {
+      transform: scale(0.88) rotateY(-12deg) translateX(20px);
+      opacity: 0.5;
+      z-index: 1;
+    }
+    .testim-card--hidden {
+      display: none;
+    }
+
+    /* Quote icon */
+    .testim-card__quote-icon {
+      font-size: 48px;
+      line-height: 1;
+      color: #C8A84B;
+      opacity: 0.5;
+      margin-bottom: 8px;
+      font-family: Georgia, serif;
+    }
+
+    /* Animated quote text */
+    .testim-card__text {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #c8d6f0;
+      margin-bottom: 28px;
+      min-height: 90px;
+    }
+    .testim-card__text .word {
+      display: inline-block;
+      opacity: 0;
+      filter: blur(4px);
+      animation: wordReveal 0.35s forwards;
+    }
+    @keyframes wordReveal {
+      to { opacity: 1; filter: blur(0); }
+    }
+
+    /* Reviewer */
+    .testim-card__reviewer {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .testim-card__avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #C8A84B;
+      flex-shrink: 0;
+    }
+    .testim-card__name {
+      font-weight: 700;
+      color: #fff;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+    .testim-card__meta {
+      font-size: 12px;
+      color: #7a90b8;
+    }
+    .testim-card__stars {
+      color: #C8A84B;
+      font-size: 13px;
+      margin-bottom: 4px;
+      letter-spacing: 1px;
+    }
+
+    /* Nav */
+    .testimonials-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 36px;
+    }
+    .testimonials-nav__btn {
+      background: rgba(200,168,75,0.12);
+      border: 1px solid rgba(200,168,75,0.3);
+      color: #C8A84B;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .testimonials-nav__btn:hover {
+      background: rgba(200,168,75,0.25);
+      transform: scale(1.08);
+    }
+    .testimonials-dots {
+      display: flex;
+      gap: 8px;
+    }
+    .testimonials-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(200,168,75,0.3);
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.25s;
+      padding: 0;
+    }
+    .testimonials-dot--active {
+      background: #C8A84B;
+      transform: scale(1.35);
+    }
+
+    /* Mobile: only show active card */
+    @media (max-width: 767px) {
+      .testim-card--left,
+      .testim-card--right {
+        display: none;
+      }
+      .testim-card--active {
+        width: min(320px, 90vw);
+      }
+    }
+  </style>
+
   <script src="js/main.js?v=6"></script>
   <script>
     function attachHomeCardRouting() {
@@ -194,6 +398,137 @@
     const _homeRouteObserver = new MutationObserver(attachHomeCardRouting);
     _homeRouteObserver.observe(document.body, { childList: true, subtree: true });
     document.addEventListener('DOMContentLoaded', attachHomeCardRouting);
+  </script>
+
+  <script>
+    (function () {
+      const TESTIMONIALS = [
+        {
+          text: "Ordered the home jersey and it arrived in two days. The quality is unreal — feels exactly like what the boys wear on the pitch. Got my name and number printed on the back and I haven't taken it off since.",
+          name: "Sipho M.",
+          meta: "Johannesburg, Gauteng",
+          stars: 5,
+          img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=120&h=120&fit=crop&crop=face&auto=format"
+        },
+        {
+          text: "Bought the away green kit for my son's birthday. He absolutely loves it. The personalisation on the back came out perfectly sharp. Proper Adidas quality — worth every rand.",
+          name: "Thandi K.",
+          meta: "Cape Town, Western Cape",
+          stars: 5,
+          img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=120&h=120&fit=crop&crop=face&auto=format"
+        },
+        {
+          text: "Wore mine to the stadium and had three strangers ask me where I got it. The fit is spot on — athletic cut, breathable fabric. This is what supporting Bafana Bafana looks like.",
+          name: "Lebo D.",
+          meta: "Durban, KwaZulu-Natal",
+          stars: 5,
+          img: "https://images.unsplash.com/photo-1520341280432-4749d4d7bcf9?w=120&h=120&fit=crop&crop=face&auto=format"
+        },
+        {
+          text: "Absolutely stunning kit. I ordered three — one to wear, one to frame, one to keep sealed. The gold badge detail on the yellow is striking in person. Fast delivery, great packaging.",
+          name: "Nkosi B.",
+          meta: "Pretoria, Gauteng",
+          stars: 5,
+          img: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?w=120&h=120&fit=crop&crop=face&auto=format"
+        },
+        {
+          text: "I was sceptical ordering online but the checkout was smooth and the jersey arrived exactly as shown. The green away kit looks even better in person. Very proud to rep South Africa.",
+          name: "Ayanda N.",
+          meta: "East London, Eastern Cape",
+          stars: 5,
+          img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&h=120&fit=crop&crop=face&auto=format"
+        }
+      ];
+
+      let current = 0;
+      let autoTimer = null;
+
+      function buildCard(t, role) {
+        const card = document.createElement('article');
+        card.className = 'testim-card testim-card--' + role;
+        card.innerHTML = `
+          <div class="testim-card__quote-icon">"</div>
+          <div class="testim-card__stars">${'★'.repeat(t.stars)}</div>
+          <p class="testim-card__text"></p>
+          <div class="testim-card__reviewer">
+            <img class="testim-card__avatar" src="${t.img}" alt="${t.name}" loading="lazy">
+            <div>
+              <div class="testim-card__name">${t.name}</div>
+              <div class="testim-card__meta">${t.meta}</div>
+            </div>
+          </div>
+        `;
+        if (role === 'active') {
+          animateWords(card.querySelector('.testim-card__text'), t.text);
+        } else {
+          card.querySelector('.testim-card__text').textContent = t.text;
+        }
+        return card;
+      }
+
+      function animateWords(el, text) {
+        el.innerHTML = '';
+        text.split(' ').forEach((word, i) => {
+          const span = document.createElement('span');
+          span.className = 'word';
+          span.textContent = word + ' ';
+          span.style.animationDelay = (i * 0.045) + 's';
+          el.appendChild(span);
+        });
+      }
+
+      function render() {
+        const carousel = document.getElementById('testimonialsCarousel');
+        if (!carousel) return;
+        carousel.innerHTML = '';
+
+        const len = TESTIMONIALS.length;
+        const leftIdx  = (current - 1 + len) % len;
+        const rightIdx = (current + 1) % len;
+
+        carousel.appendChild(buildCard(TESTIMONIALS[leftIdx],  'left'));
+        carousel.appendChild(buildCard(TESTIMONIALS[current],  'active'));
+        carousel.appendChild(buildCard(TESTIMONIALS[rightIdx], 'right'));
+
+        // Click side cards to navigate
+        carousel.querySelector('.testim-card--left').addEventListener('click', () => go(-1));
+        carousel.querySelector('.testim-card--right').addEventListener('click', () => go(1));
+
+        // Dots
+        const dotsEl = document.getElementById('testimDots');
+        if (dotsEl) {
+          dotsEl.innerHTML = '';
+          TESTIMONIALS.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'testimonials-dot' + (i === current ? ' testimonials-dot--active' : '');
+            dot.setAttribute('aria-label', 'Testimonial ' + (i + 1));
+            dot.addEventListener('click', () => goTo(i));
+            dotsEl.appendChild(dot);
+          });
+        }
+      }
+
+      function goTo(idx) {
+        current = (idx + TESTIMONIALS.length) % TESTIMONIALS.length;
+        render();
+        resetAuto();
+      }
+
+      function go(dir) { goTo(current + dir); }
+
+      function resetAuto() {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(() => go(1), 5000);
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        render();
+        resetAuto();
+
+        document.getElementById('testimPrev').addEventListener('click', () => go(-1));
+        document.getElementById('testimNext').addEventListener('click', () => go(1));
+      });
+    })();
   </script>
 </body>
 </html>
