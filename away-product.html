@@ -289,6 +289,26 @@
     </div>
   </section>
 
+  <!-- Added-to-Cart Notification -->
+  <div class="cart-notif" id="cartNotif" aria-hidden="true" role="status" aria-live="polite">
+    <div class="cart-notif__header">
+      <span class="cart-notif__tick">&#10003; Added to Cart</span>
+      <button class="cart-notif__close" onclick="closeCartNotif()" aria-label="Close notification">&#10005;</button>
+    </div>
+    <div class="cart-notif__body">
+      <img class="cart-notif__img" src="./images/away-jersey-front.png" alt="Bafana Bafana Away Jersey">
+      <div class="cart-notif__info">
+        <p class="cart-notif__name">Bafana Bafana Away Jersey 2026</p>
+        <p class="cart-notif__price">R 999</p>
+      </div>
+    </div>
+    <div class="cart-notif__actions">
+      <button class="cart-notif__btn cart-notif__btn--primary" onclick="goToCart()">View Cart</button>
+      <button class="cart-notif__btn cart-notif__btn--ghost" onclick="closeCartNotif()">Continue Shopping</button>
+    </div>
+    <div class="cart-notif__progress"></div>
+  </div>
+
   <!-- Add to Cart Modal -->
   <div class="modal-overlay" id="cartModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
     <div class="modal" role="document">
@@ -386,9 +406,84 @@
     @media(max-width:767px){.testim-card--left,.testim-card--right{display:none}.testim-card--active{width:min(320px,90vw)}}
   </style>
 
+  <style>
+    /* ── Cart notification ── */
+    .cart-notif {
+      position: fixed;
+      top: 84px;
+      right: -420px;
+      width: 360px;
+      max-width: calc(100vw - 24px);
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.08);
+      z-index: 9999;
+      transition: right 0.38s cubic-bezier(.4,0,.2,1);
+      overflow: hidden;
+    }
+    .cart-notif.open { right: 16px; }
+    .cart-notif__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: #1a6b3a;
+      color: #fff;
+    }
+    .cart-notif__tick { font-weight: 700; font-size: 14px; letter-spacing: 0.3px; }
+    .cart-notif__close {
+      background: none; border: none; color: #fff;
+      cursor: pointer; font-size: 15px; line-height: 1; padding: 0;
+    }
+    .cart-notif__close:hover { opacity: 0.75; }
+    .cart-notif__body {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 16px 12px;
+    }
+    .cart-notif__img {
+      width: 76px; height: 76px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: #f3f4f6;
+      flex-shrink: 0;
+      border: 1px solid #e5e7eb;
+    }
+    .cart-notif__name {
+      font-weight: 700; font-size: 14px;
+      color: #111827; margin-bottom: 6px; line-height: 1.35;
+    }
+    .cart-notif__price {
+      font-size: 15px; font-weight: 800; color: #1a6b3a;
+    }
+    .cart-notif__actions {
+      display: flex; gap: 8px; padding: 0 16px 14px;
+    }
+    .cart-notif__btn {
+      flex: 1; padding: 10px 8px;
+      border-radius: 8px; font-size: 13px; font-weight: 700;
+      cursor: pointer; border: none; transition: opacity 0.15s;
+    }
+    .cart-notif__btn:hover { opacity: 0.88; }
+    .cart-notif__btn--primary { background: #1a6b3a; color: #fff; }
+    .cart-notif__btn--ghost   { background: #f3f4f6; color: #111827; }
+    .cart-notif__progress {
+      height: 3px; background: #b8943c; transform-origin: left;
+    }
+    .cart-notif__progress.running {
+      animation: notifBar 5s linear forwards;
+    }
+    @keyframes notifBar { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+    @media (max-width: 480px) {
+      .cart-notif { width: calc(100vw - 24px); right: -110%; }
+      .cart-notif.open { right: 12px; }
+    }
+  </style>
+
   <script src="js/main.js?v=6"></script>
   <script src="js/away-canvas.js?v=4"></script>
-  <script src="js/away-product.js?v=6"></script>
+  <script src="js/away-product.js?v=7"></script>
   <script src="js/testimonials.js?v=1"></script>
 </body>
 </html>
