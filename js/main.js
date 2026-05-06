@@ -118,7 +118,9 @@ function _injectDrawerStyles() {
 
     .bfk-drawer__body {
       flex: 1; overflow-y: auto; padding: 16px 20px;
+      transition: opacity 0.2s;
     }
+    .bfk-drawer__body.updating { opacity: 0.45; pointer-events: none; }
     .bfk-drawer__empty {
       text-align: center; padding: 48px 24px;
       color: #6b7280; font-size: 15px; line-height: 1.6;
@@ -144,18 +146,36 @@ function _injectDrawerStyles() {
     .bfk-item__details { flex: 1; min-width: 0; }
     .bfk-item__name {
       font-weight: 700; font-size: 14px; color: #111827;
-      margin: 0 0 4px; line-height: 1.3;
+      margin: 0 0 2px; line-height: 1.3;
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .bfk-item__variant { font-size: 12px; color: #6b7280; margin: 0 0 6px; }
-    .bfk-item__qty-price {
-      display: flex; align-items: center; gap: 10px;
+    .bfk-item__price { font-size: 15px; font-weight: 800; color: #1a6b3a; margin: 0 0 8px; }
+
+    /* Quantity controls */
+    .bfk-item__controls {
+      display: flex; align-items: center; gap: 6px;
     }
-    .bfk-item__price { font-size: 15px; font-weight: 800; color: #1a6b3a; }
-    .bfk-item__qty {
-      font-size: 12px; color: #6b7280;
-      background: #f3f4f6; border-radius: 4px; padding: 2px 8px;
+    .bfk-qty-btn {
+      width: 30px; height: 30px; border-radius: 8px;
+      border: 1px solid #e5e7eb; background: #f9fafb;
+      color: #111827; font-size: 18px; font-weight: 600; line-height: 1;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, border-color 0.15s; flex-shrink: 0;
     }
+    .bfk-qty-btn:hover { background: #e5e7eb; border-color: #d1d5db; }
+    .bfk-qty-btn:active { transform: scale(0.93); }
+    .bfk-qty-val {
+      min-width: 28px; text-align: center;
+      font-weight: 700; font-size: 14px; color: #111827;
+    }
+    .bfk-remove-btn {
+      margin-left: 4px; background: none; border: none;
+      color: #e11d48; font-size: 12px; font-weight: 600;
+      cursor: pointer; padding: 4px 6px; border-radius: 4px;
+      transition: background 0.15s; white-space: nowrap;
+    }
+    .bfk-remove-btn:hover { background: #fff0f2; }
 
     .bfk-drawer__foot {
       padding: 16px 20px; border-top: 2px solid #f3f4f6;
@@ -220,93 +240,134 @@ function _injectDrawerHTML() {
   document.getElementById('bfkDrawerClose').addEventListener('click', closeCartDrawer);
 }
 
+const _CART_QUERY = `{
+  cart(id: CART_ID) {
+    totalQuantity checkoutUrl
+    cost { totalAmount { amount } }
+    lines(first: 20) {
+      edges { node {
+        id quantity
+        merchandise {
+          ... on ProductVariant {
+            title price { amount }
+            product { title featuredImage { url altText } }
+          }
+        }
+      }}
+    }
+  }
+}`;
+
+async function _fetchCart(cartId) {
+  const res = await fetch(SHOPIFY_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': SHOPIFY_TOKEN },
+    body: JSON.stringify({ query: _CART_QUERY.replace('CART_ID', JSON.stringify(cartId)) }),
+  });
+  const json = await res.json();
+  return json?.data?.cart;
+}
+
+async function _cartLineUpdate(lineId, quantity) {
+  const cartId = findShopifyCartId();
+  if (!cartId) return;
+  const body = document.getElementById('bfkDrawerBody');
+  if (body) body.classList.add('updating');
+  try {
+    if (quantity <= 0) {
+      await fetch(SHOPIFY_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': SHOPIFY_TOKEN },
+        body: JSON.stringify({ query: `mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
+          cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
+            cart { totalQuantity } userErrors { message }
+          }
+        }`, variables: { cartId, lineIds: [lineId] } }),
+      });
+    } else {
+      await fetch(SHOPIFY_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': SHOPIFY_TOKEN },
+        body: JSON.stringify({ query: `mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+          cartLinesUpdate(cartId: $cartId, lines: $lines) {
+            cart { totalQuantity } userErrors { message }
+          }
+        }`, variables: { cartId, lines: [{ id: lineId, quantity }] } }),
+      });
+    }
+    await _loadDrawerItems();
+  } catch (e) {
+    console.error('[BafanaKit] Cart update failed:', e);
+    if (body) body.classList.remove('updating');
+  }
+}
+
 async function _loadDrawerItems() {
   const body = document.getElementById('bfkDrawerBody');
   const foot = document.getElementById('bfkDrawerFoot');
   if (!body) return;
 
-  body.innerHTML = '<div class="bfk-drawer__loading">Loading your cart…</div>';
-  if (foot) foot.style.display = 'none';
+  const isRefresh = body.classList.contains('updating');
+  if (!isRefresh) {
+    body.innerHTML = '<div class="bfk-drawer__loading">Loading your cart…</div>';
+    if (foot) foot.style.display = 'none';
+  }
 
   const cartId = findShopifyCartId();
   if (!cartId) {
-    body.innerHTML = `
-      <div class="bfk-drawer__empty">
-        <div class="bfk-drawer__empty-icon">🛒</div>
-        Your cart is empty — go grab a kit! 🇿🇦
-      </div>`;
+    body.classList.remove('updating');
+    body.innerHTML = `<div class="bfk-drawer__empty"><div class="bfk-drawer__empty-icon">🛒</div>Your cart is empty — go grab a kit! 🇿🇦</div>`;
     return;
   }
 
   try {
-    const res = await fetch(SHOPIFY_API, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Shopify-Storefront-Access-Token': SHOPIFY_TOKEN,
-      },
-      body: JSON.stringify({ query: `{
-        cart(id: ${JSON.stringify(cartId)}) {
-          totalQuantity
-          checkoutUrl
-          cost { totalAmount { amount currencyCode } }
-          lines(first: 20) {
-            edges { node {
-              id
-              quantity
-              merchandise {
-                ... on ProductVariant {
-                  title
-                  price { amount }
-                  product {
-                    title
-                    featuredImage { url altText }
-                  }
-                }
-              }
-            }}
-          }
-        }
-      }` }),
-    });
-
-    const json = await res.json();
-    const cart = json?.data?.cart;
+    const cart = await _fetchCart(cartId);
 
     if (!cart || cart.totalQuantity === 0) {
-      body.innerHTML = `
-        <div class="bfk-drawer__empty">
-          <div class="bfk-drawer__empty-icon">🛒</div>
-          Your cart is empty — go grab a kit! 🇿🇦
-        </div>`;
+      body.classList.remove('updating');
+      body.innerHTML = `<div class="bfk-drawer__empty"><div class="bfk-drawer__empty-icon">🛒</div>Your cart is empty — go grab a kit! 🇿🇦</div>`;
+      if (foot) foot.style.display = 'none';
+      updateCartBadge(0);
       return;
     }
 
-    // Render line items
-    const lines = cart.lines.edges;
-    body.innerHTML = lines.map(({ node: line }) => {
-      const m     = line.merchandise;
-      const img   = m.product?.featuredImage?.url   || '';
-      const alt   = m.product?.featuredImage?.altText || m.product?.title || 'Jersey';
-      const name  = m.product?.title || 'Bafana Bafana Jersey';
+    body.innerHTML = cart.lines.edges.map(({ node: line }) => {
+      const m       = line.merchandise;
+      const img     = m.product?.featuredImage?.url || '';
+      const alt     = m.product?.featuredImage?.altText || m.product?.title || 'Jersey';
+      const name    = m.product?.title || 'Bafana Bafana Jersey';
       const variant = (m.title && m.title !== 'Default Title') ? m.title : '';
-      const unit  = parseFloat(m.price?.amount || 0);
-      const total = (unit * line.quantity).toLocaleString('en-ZA', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+      const unit    = parseFloat(m.price?.amount || 0);
+      const lineTotal = (unit * line.quantity).toLocaleString('en-ZA', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
       return `
         <div class="bfk-item">
           <img class="bfk-item__img" src="${img}" alt="${alt}" loading="lazy">
           <div class="bfk-item__details">
             <p class="bfk-item__name">${name}</p>
             ${variant ? `<p class="bfk-item__variant">${variant}</p>` : ''}
-            <div class="bfk-item__qty-price">
-              <span class="bfk-item__price">R ${total}</span>
-              <span class="bfk-item__qty">Qty: ${line.quantity}</span>
+            <p class="bfk-item__price">R ${lineTotal}</p>
+            <div class="bfk-item__controls">
+              <button class="bfk-qty-btn" data-action="dec" data-id="${line.id}" data-qty="${line.quantity}">−</button>
+              <span class="bfk-qty-val">${line.quantity}</span>
+              <button class="bfk-qty-btn" data-action="inc" data-id="${line.id}" data-qty="${line.quantity}">+</button>
+              <button class="bfk-remove-btn" data-action="remove" data-id="${line.id}">Remove</button>
             </div>
           </div>
         </div>`;
     }).join('');
 
-    // Total & checkout
+    // Event delegation for qty/remove buttons
+    body.classList.remove('updating');
+    body.onclick = e => {
+      const btn = e.target.closest('[data-action]');
+      if (!btn) return;
+      const id  = btn.dataset.id;
+      const qty = parseInt(btn.dataset.qty || 1, 10);
+      if (btn.dataset.action === 'inc')    _cartLineUpdate(id, qty + 1);
+      if (btn.dataset.action === 'dec')    _cartLineUpdate(id, qty - 1);
+      if (btn.dataset.action === 'remove') _cartLineUpdate(id, 0);
+    };
+
     const totalAmt = parseFloat(cart.cost.totalAmount.amount)
       .toLocaleString('en-ZA', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
     const totalEl    = document.getElementById('bfkDrawerTotal');
@@ -318,6 +379,7 @@ async function _loadDrawerItems() {
     if (foot) foot.style.display = 'block';
 
   } catch (e) {
+    body.classList.remove('updating');
     body.innerHTML = `<div class="bfk-drawer__error">Could not load cart. Please try again.</div>`;
     console.error('[BafanaKit] Cart drawer load failed:', e);
   }
