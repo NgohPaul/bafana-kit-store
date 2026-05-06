@@ -304,6 +304,20 @@
     </div>
   </div>
 
+  <!-- Testimonials Section -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="testimonials-section__header">
+      <p class="testimonials-section__eyebrow">Fan Reviews</p>
+      <h2 class="testimonials-section__title">What Bafana Fans Are Saying</h2>
+    </div>
+    <div class="testimonials-carousel" id="testimonialsCarousel"></div>
+    <div class="testimonials-nav">
+      <button class="testimonials-nav__btn" id="testimPrev" aria-label="Previous testimonial">&#8592;</button>
+      <div class="testimonials-dots" id="testimDots"></div>
+      <button class="testimonials-nav__btn" id="testimNext" aria-label="Next testimonial">&#8594;</button>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer class="site-footer" role="contentinfo">
     <div class="site-footer__inner">
@@ -344,8 +358,37 @@
     </div>
   </footer>
 
+  <style>
+    .testimonials-section{background:#071a0e;padding:80px 24px 90px;overflow:hidden}
+    .testimonials-section__header{text-align:center;margin-bottom:52px}
+    .testimonials-section__eyebrow{font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#b8943c;margin-bottom:12px}
+    .testimonials-section__title{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;color:#fff;margin:0}
+    .testimonials-carousel{display:flex;align-items:center;justify-content:center;gap:24px;perspective:1000px;min-height:360px;position:relative}
+    .testim-card{background:#0d3a1a;border:1px solid rgba(184,148,60,.22);border-radius:20px;padding:32px 28px;width:320px;max-width:88vw;flex-shrink:0;transition:transform .5s cubic-bezier(.4,0,.2,1),opacity .5s ease,box-shadow .5s ease;cursor:pointer;position:relative}
+    .testim-card--active{transform:scale(1) rotateY(0deg);opacity:1;box-shadow:0 20px 60px rgba(26,107,58,.35),0 0 0 2px rgba(184,148,60,.45);z-index:2}
+    .testim-card--left{transform:scale(.88) rotateY(12deg) translateX(-20px);opacity:.45;z-index:1}
+    .testim-card--right{transform:scale(.88) rotateY(-12deg) translateX(20px);opacity:.45;z-index:1}
+    .testim-card__quote-icon{font-size:48px;line-height:1;color:#b8943c;opacity:.55;margin-bottom:8px;font-family:Georgia,serif}
+    .testim-card__text{font-size:15px;line-height:1.7;color:#d4e8d8;margin-bottom:28px;min-height:90px}
+    .testim-card__text .word{display:inline-block;opacity:0;filter:blur(4px);animation:wordReveal .35s forwards}
+    @keyframes wordReveal{to{opacity:1;filter:blur(0)}}
+    .testim-card__reviewer{display:flex;align-items:center;gap:14px}
+    .testim-card__avatar{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid #b8943c;flex-shrink:0}
+    .testim-card__name{font-weight:700;color:#fff;font-size:14px;margin-bottom:2px}
+    .testim-card__meta{font-size:12px;color:#7ab88a}
+    .testim-card__stars{color:#b8943c;font-size:13px;margin-bottom:4px;letter-spacing:1px}
+    .testimonials-nav{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:36px}
+    .testimonials-nav__btn{background:rgba(184,148,60,.12);border:1px solid rgba(184,148,60,.35);color:#b8943c;border-radius:50%;width:44px;height:44px;font-size:20px;cursor:pointer;transition:background .2s,transform .2s;display:flex;align-items:center;justify-content:center}
+    .testimonials-nav__btn:hover{background:rgba(184,148,60,.25);transform:scale(1.08)}
+    .testimonials-dots{display:flex;gap:8px}
+    .testimonials-dot{width:8px;height:8px;border-radius:50%;background:rgba(184,148,60,.3);border:none;cursor:pointer;transition:background .25s,transform .25s;padding:0}
+    .testimonials-dot--active{background:#b8943c;transform:scale(1.35)}
+    @media(max-width:767px){.testim-card--left,.testim-card--right{display:none}.testim-card--active{width:min(320px,90vw)}}
+  </style>
+
   <script src="js/main.js?v=6"></script>
   <script src="js/away-canvas.js?v=4"></script>
   <script src="js/away-product.js?v=6"></script>
+  <script src="js/testimonials.js?v=1"></script>
 </body>
 </html>
